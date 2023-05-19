@@ -8,9 +8,10 @@ import Header from "../../components/Header";
 import { tokens } from "../theme";
 
 
+
 const EmpMD =()=>{
     const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
+    const colors = tokens(theme.palette.mode)
     const columns =[
         { field: "id", headerName:"ID" },
         { field:"Emp_name", headerName:"Employee Name", flex:1, cellClassName:"name--column-cell"},
@@ -24,29 +25,6 @@ const EmpMD =()=>{
         { field:"Salary", headerName:"Salary", flex:1},
         { field:"access", headerName:"Access Level", flex:1, renderCell: ({ row: { access } }) => {
             return (
-              <Box
-                width="60%"
-                m="0 auto"
-                p="5px"
-                display="flex"
-                justifyContent="center"
-                backgroundColor={
-                  access === "admin" ? 
-                  colors.greenAccent[600]
-                    : access === "manager"
-                    ? colors.greenAccent[700]
-                    : colors.greenAccent[700]
-                }
-                borderRadius="4px"
-              >
-                {access === "admin" && <AdminPanelSettingsOutlinedIcon />}
-                {access === "manager" && <SecurityOutlinedIcon />}
-                {access === "user" && <LockOpenOutlinedIcon />}
-                <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
-                  {access}
-                </Typography>
-              </Box>);
-    }   }    ];
     return(
         <Box m="20px">
             
@@ -90,14 +68,16 @@ const EmpMD =()=>{
 };
 export default EmpMD;*/
 
-
+/*
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import {Box} from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import {Box, Button} from "@mui/material";
 import Header from '../../components/Header'
 import { colors, useTheme } from '@mui/material'
 import { tokens } from "../theme";
+import { DataGrid } from "@mui/x-data-grid";
+
 
 
 const Read = () => {
@@ -105,12 +85,19 @@ const Read = () => {
   const colors = tokens(theme.palette.mode);
   const [data, setData] = useState([]);
   const [tabledark, setTableDark] = useState("");
+  
+  const navigate = useNavigate()
+  const handleClick =(event,cellValues)=>{
+    console.log(cellValues.row);
+
+
+  }
   function getData() {
     axios
       .get("https://646296267a9eead6fad2c898.mockapi.io/api/V1/EmpMD-PerM")
-      .then((res) => {
-        setData(res.data);
-      });
+      .then(res => setData(res.data)
+        .catch(err=>console.log(err))
+      );
   }
   function handleDelete(id) {
     axios
@@ -119,6 +106,22 @@ const Read = () => {
         getData();
       });
   }
+ 
+  const columns =[
+    
+    { field: "id", headerName:"id" },
+    { field:"fname", headerName:"First Name", flex:1, cellClassName:"name--column-cell"},
+    { field:"Date of Joining", headerName:"DOJ", flex:1},
+    { field:"phone", headerName:"Contact#", flex:1},
+    { field:"etype", headerName:"Employement Type", flex:1},
+    { field:"depart", headerName:"Department", flex:1},
+    { field:"desig", headerName:"Designation", flex:1},
+    { field:"shift", headerName:"Shift", flex:1},
+    { field:"salarymode", headerName:"Salary Mode", flex:1},
+   
+  ]
+
+/*
   const setToLocalStorage = (id, fname, lname, doj, offrdate, 
     etype, depart, desig, shift, salarymode, 
     status, salarystructure) => {
@@ -135,12 +138,54 @@ const Read = () => {
     localStorage.setItem("status", status);
     localStorage.setItem("salarystructure", salarystructure);
 
-  };
+  };*/
+
+  /*
   useEffect(() => {
     getData();
   }, []);
   return (
-    <Box m='20pxc'>
+
+<Box m="20px">
+            
+            <Header title ="EMPLOYEE MASTERDATA" subtitle={"Manage Employee MasterData"}/>
+            <Box m="40 px 0 0 0" height ="75vh"
+            sx={{
+              "& .MuiDataGrid-root": {
+                border: "none",
+              },
+              "& .MuiDataGrid-cell": {
+                borderBottom: "none",
+              },
+              "& .name-column--cell": {
+                color: colors.greenAccent[300],
+              },
+              "& .MuiDataGrid-columnHeaders": {
+                backgroundColor: colors.blueAccent[700],
+                borderBottom: "none",
+              },
+              "& .MuiDataGrid-virtualScroller": {
+                backgroundColor: colors.primary[400],
+              },
+              "& .MuiDataGrid-footerContainer": {
+                borderTop: "none",
+                backgroundColor: colors.blueAccent[700],
+              },
+              "& .MuiCheckbox-root": {
+                color: `${colors.greenAccent[200]} !important`,
+              },
+            }}
+          >
+    
+            <DataGrid checkboxSelection 
+            rows={data}
+            columns={columns}
+            />
+            </Box>
+            </Box>
+
+/*
+cc
       <Header title="Employee MasterData" subtitle="Employee Master Data" />
         <Box display="flex" justifyContent="space-between"  
         backgroundColor={colors.white[500]} color={colors.blue[900]}></Box>
@@ -158,7 +203,7 @@ const Read = () => {
         <Link to="/CreateMD">
           <button className="btn btn-secondary">Create</button>
         </Link>
-      </div>
+      </div>/*
       <table className={`table ${tabledark}`}>
         <thead>
           <tr>
@@ -177,8 +222,8 @@ const Read = () => {
 
 
           </tr>
-        </thead>
-        {data.map((eachData) => {
+        </thead>cc
+      { data.map((eachData) => {
           return (
             <>
               <tbody>
@@ -195,7 +240,6 @@ const Read = () => {
                   <td>{eachData.salarymode}</td>
                   <td>{eachData.status}</td>
                   <td>{eachData.salarystructure}</td>
-
                   <td>
                     <Link to="/Update">
                       <button
@@ -231,12 +275,121 @@ const Read = () => {
                   </td>
                 </tr>
               </tbody>
-            </>
-          );
-        })}
-      </table>
+            </>*/
+       /*  );
+        
       
-    </Box>
-  );
+  
 };
+export default Read;*/
+import React, { useEffect, useState  } from 'react';
+import { Table, checkbox } from 'semantic-ui-react'
+import axios from 'axios';
+import {Box, Button} from "@mui/material";
+import Header from '../../components/Header'
+import { colors, useTheme } from '@mui/material'
+import { tokens } from "../theme";
+import { Link } from 'react-router-dom';
+
+
+const Read=()=> {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
+  const [APIData, setAPIData] = useState([]);
+  useEffect(() => {
+      axios.get(`https://646296267a9eead6fad2c898.mockapi.io/api/V1/EmpMD-PerM`)
+          .then((response) => {
+              console.log(response.data)
+              setAPIData(response.data);
+          })
+  }, []);
+
+  const setData = (data) => {
+    let { id, fname, lname, doj, offrdate, 
+      etype, depart, desig, shift, salarymode, 
+      status, salarystructure } = data;
+      localStorage.setItem('id', id);
+      localStorage.setItem('fname', fname);
+      localStorage.setItem('lname', lname);
+      localStorage.setItem('doj', doj);
+      localStorage.setItem('offrdate', offrdate);
+      localStorage.setItem('etype', etype);
+      localStorage.setItem('depart', depart);
+      localStorage.setItem('desig', desig);
+      localStorage.setItem('shift', shift);
+      localStorage.setItem('salarymode', salarymode);
+      localStorage.setItem('status', status);
+      localStorage.setItem('salarystructure', salarystructure);
+
+}
+
+const getData = () => {
+  axios.get(`https://646296267a9eead6fad2c898.mockapi.io/api/V1/EmpMD-PerM`)
+      .then((getData) => {
+          setAPIData(getData.data);
+      })
+}
+const onDelete = (id) => {
+  axios.delete(`https://646296267a9eead6fad2c898.mockapi.io/api/V1/EmpMD-PerM/${id}`)
+  .then(() => {
+      getData();
+  })
+}
+    return (
+        <div>
+           <Header title="Employee MasterData" subtitle="Employee Master Data" />
+      <Box display="flex" justifyContent="space-between"  
+      backgroundColor={colors.white[500]} color={colors.blue[900]}>
+        <Table singleLine>
+                <Table.Header>
+                    <Table.Row>
+                    <Table.HeaderCell>Id</Table.HeaderCell>
+
+                        <Table.HeaderCell>First Name</Table.HeaderCell>
+                        <Table.HeaderCell>Last Name</Table.HeaderCell>
+                        <Table.HeaderCell>Date of Joining</Table.HeaderCell>
+                        <Table.HeaderCell>Offer Date</Table.HeaderCell>
+                        <Table.HeaderCell>Gender</Table.HeaderCell>
+                        <Table.HeaderCell>Designation</Table.HeaderCell>
+                        <Table.HeaderCell>Salary Mode</Table.HeaderCell>
+                        <Table.HeaderCell>Salary Struture</Table.HeaderCell>
+                        <Table.HeaderCell>Update</Table.HeaderCell>
+                        <Table.HeaderCell>Delete</Table.HeaderCell>
+
+
+
+                    </Table.Row>
+                </Table.Header>
+           <Table.Body>
+  {APIData.map((data) => {
+     return (
+      
+       <Table.Row>
+          <Table.Cell>{data.id}</Table.Cell>
+           <Table.Cell>{data.fname}</Table.Cell>
+           <Table.Cell>{data.lname}</Table.Cell>
+           <Table.Cell>{data.doj}</Table.Cell>
+           <Table.Cell>{data.offrdate}</Table.Cell>
+           <Table.Cell>{data.etype}</Table.Cell>
+           <Table.Cell>{data.desig}</Table.Cell>
+           <Table.Cell>{data.salarymode}</Table.Cell>
+           <Table.Cell>{data.salarystructure}</Table.Cell>
+           <Link to='/Update'>
+  <Table.Cell> 
+  <Button primary className='ui primary button'
+  onClick={() => setData(data)}>Update</Button>
+   </Table.Cell>
+</Link>
+<Table.Cell>
+   <Button primary className='ui primary button'
+    onClick={() => onDelete(data.id)}>Delete</Button>
+   </Table.Cell>
+        </Table.Row>
+   )})}
+</Table.Body></Table>
+</Box>
+        </div>
+    )
+}
 export default Read;

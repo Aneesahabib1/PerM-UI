@@ -22,7 +22,7 @@ const Dashboard = () => {
         <Box display="flex" justifyContent="space-between" alignItems="center" >
           <Header  title="DASHBOARD" subtitle="Welcome to your dashboard" />
           <Box>
-          <Button
+          <Button 
             sx={{
               backgroundColor: colors.white[100],
               color: colors.blue[900],

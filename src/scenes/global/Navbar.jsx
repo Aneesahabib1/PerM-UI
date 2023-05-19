@@ -149,6 +149,32 @@ const Navbar = () => {
               icon={<CorporateFareIcon />}
               selected={selected}
           setSelected={setSelected} /></Box>
+
+<Typography sx={{ m: "25px 0 5px 20px" }}>  </Typography>
+              <Box sx={{borderRadius:'15px', boxShadow:'1px 2px 9px #d6ebfa',backgroundColor:colors.white[100]}}>
+              <Item
+              title="Atttendance Request"
+              to="/Acreate"
+              icon={<EventNoteIcon />} />
+            </Box>
+
+            <Typography sx={{ m: "25px 0 5px 20px" }}>  </Typography>
+              <Box sx={{borderRadius:'15px', boxShadow:'1px 2px 9px #d6ebfa',backgroundColor:colors.white[100]}}>
+              <Item
+              title="Mark Atttendance"
+              to="/MAttcreate"
+              icon={<EventNoteIcon />} />
+            </Box>
+
+            <Typography sx={{ m: "25px 0 5px 20px" }}>  </Typography>
+              <Box sx={{borderRadius:'15px', boxShadow:'1px 2px 9px #d6ebfa',backgroundColor:colors.white[100]}}>
+              <Item
+              title="Task"
+              to="/CreateTask"
+              icon={<EventNoteIcon />} />
+            </Box>
+
+            
            {/* 
             <Typography sx={{ m: "25px 0 5px 20px" }}>  </Typography>
             <Box sx={{borderRadius:'15px', boxShadow:'1px 2px 9px #d6ebfa',backgroundColor:colors.white[100]}}>

@@ -6,369 +6,648 @@ import {Box} from "@mui/material";
 import { colors, useTheme } from '@mui/material'
 import { tokens } from "../scenes/theme";
 import Header from "../components/Header";
+import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
+import { Button, Form, Checkbox, Input, Select } from 'semantic-ui-react'
+
 
 const Update = () => {
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  let navigate = useNavigate();
+  const options = [
+    { key: 'm', text: 'Male', value: 'male' },
+    { key: 'f', text: 'Female', value: 'female' },
+    { key: 'o', text: 'Other', value: 'other' },
+  ];
+  const optionst = [
+    { key: 'm', text: 'Full-time', value: 'Full-time' },
+    { key: 'f', text: 'Part-time', value: 'Part-time' },
+
+  ]
+  const optionsta = [
+    { key: 'm', text: '15 Days', value: '15 Daya' },
+    { key: 'f', text: '30 Days', value: '30 Days' },
+
+  ]
+  const optionstb = [
+    { key: 'm', text: 'Finance', value: 'Finance' },
+    { key: 'f', text: 'Sales ', value: 'Part-timeC' },
+    { key: 'o', text: 'Marketing ', value: 'Marketing' },
+    { key: 'p', text: 'HR ', value: 'HR' },
+    { key: 'q', text: 'Production ', value: 'Productione' },
+    { key: 'r', text: 'IT ', value: 'ITc' },
+  ]
+  const optionstc = [
+    { key: 'm', text: 'Morning', value: 'Morning' },
+    { key: 'f', text: 'Evening', value: 'Evening' },
+
+  ]
+  const optionste = [
+    { key: 'm', text: 'Married', value: 'Married' },
+    { key: 'f', text: 'Un-married', value: 'Un-married' },
+
+  ]
+  const optionstd = [
+    { key: 'm', text: 'Monthly', value: 'Monthly' },
+    { key: 'f', text: 'Weekly', value: 'Weekly' },
+
+  ]
+
+const [id, setId] = useState(0);
+const  [fname, setFname]= useState("");
+const  [lname,setLname]= useState("");
+const  [gender, setGender]= useState("");
+const  [dob, setDOB]= useState("");
+const  [doj, setDoj]= useState("");
+const  [etype, setEtype]= useState("");
+const  [emrgncyname, setEmrgncyName]= useState("");
+const  [relation, setRelation]= useState("");
+const  [jobapp, setjobapp]= useState("");
+const  [conenddate, setConenddate]= useState("");
+const  [offrdate, setOffrdate]= useState("");
+const  [notice, setNotice]= useState("");
+const  [confdate, setConfdate]= useState("");
+const  [dor, setDOR]= useState("");
+const  [departn, setdepartn]= useState("");
+const  [gradee, setGrade]= useState("");
+const  [desigg, SetDesigg]= useState("");
+const  [reportto, setReportto]= useState("");
+const  [branch, SetBranch]= useState("");
+const  [deviceid, setDeviceid]= useState("");
+const  [holidays, setHolidays]= useState("");
+const  [shift, setShift]= useState("");
+const  [salarymode, setSalarymode]= useState("");
+const  [bank, setBank]= useState("");
+const  [bankacc, setbankAcc]= useState("");
+const  [payrollc, setPayrollc]= useState("");
+const  [pfacc, setPfacc]= useState("");
+const  [hprovider, setHprovider]= useState("");
+const  [hnumber, setHnumber]= useState("");
+const  [status, setStatus]= useState("");
+const  [bldgrp, setBldgrp]= useState("");
+const  [fbg, setFbg]= useState("");
+const  [healthd, setHealthd]= useState("");
+const  [cnic, setCnic]= useState("");
+const  [issuedata, setIssuedate]= useState("");
+const  [expdate, setExpdate]= useState("");
+const  [uni, setUni]= useState("");
+const  [program, setProgram]= useState("");
+const  [level, setLevel]= useState("");
+const  [passingyr, setPassingyr]= useState("");
+const  [excomp, setExcomp]= useState("");
+const  [exdesig, setExdesig]= useState("");
+const  [exsalary, setExsalary]= useState("");
+const  [add, setAdd]= useState("");
+const  [exbranch, setEcxcbranch]= useState("");
+const  [stdate, setStdate]= useState("");
+const  [endate, setEndate]= useState("");
+const  [salarystructure, setSalarystructure]= useState("");
+const  [name, setName]= useState("");
+const  [desig, setDesig]= useState("");
+const  [rqskills, setRqskills]= useState("");
+const  [des, setDes]= useState("");
+const  [resigdate, setResigdate]= useState("");
+const  [exdate, setExdate]= useState("");
+const  [relievingdate, setReleivingdate]= useState("");
+const  [feedback, setFeedback]= useState("");
+const  [newplace, setNewplace]= useState("");
+const  [reasonleaving, setReasonleaving]= useState("");
+
+useEffect(() => {
+  setId(localStorage.getItem("id"));
+  setFname(localStorage.getItem("fname", fname));
+  setLname(localStorage.getItem("lname", lname));
+  setDoj(localStorage.getItem("doj", doj));
+  setOffrdate(localStorage.getItem("offrdate", offrdate));
+  setEtype(localStorage.getItem("etype", etype));
+  setdepartn(localStorage.getItem("depart", departn));
+  setDesig(localStorage.getItem("desig", desig));
+  setShift(localStorage.getItem("shift", shift));
+  setSalarymode(localStorage.getItem("salarymode", salarymode));
+  setSalarystructure(localStorage.getItem("salarystructure", salarystructure));
+
+}, []);
+
+const updateAPIData = () => {
+  axios.put(`https://646296267a9eead6fad2c898.mockapi.io/api/V1/EmpMD-PerM/${id}`, {
+    id:id,
+    fname: fname,
+    lname: lname,
+    doj: doj,
+    offrdate: offrdate,
+    etype: etype,
+    departn: departn,
+    desig: desig,
+    shift: shift,
+    salarymode: salarymode,
+    salarystructure: salarystructure,
+}).then(() => {
+  navigate("/Read");
+})
+}
 
 
-  const [id, setId] = useState(0);
-  const  [fname, setFname]= useState("");
-   const  [lname,setLname]= useState("");
-   const  [doj, setDoj]= useState("");
-   const  [offrdate, setOffrdate]= useState("");
-   const  [etype, setEtype]= useState("");
-   const  [depart, setDepart]= useState("");
-   const  [desig, setDesig]= useState("");
-   const  [shift, setShift]= useState("");
-   const  [salarymode, setSalarymode]= useState("");
-   const  [status, setStatus]= useState("");
-   const  [salarystructure, setSalarystructure]= useState("");
-
-   const navigate = useNavigate();
-
-  useEffect(() => {
-    setId(localStorage.getItem("id"));
-    setFname(localStorage.getItem("fname", fname));
-    setLname(localStorage.getItem("lname", lname));
-    setDoj(localStorage.getItem("doj", doj));
-    setOffrdate(localStorage.getItem("offrdate", offrdate));
-    setEtype(localStorage.getItem("etype", etype));
-    setDepart(localStorage.getItem("depart", depart));
-    setDesig(localStorage.getItem("desig", desig));
-    setShift(localStorage.getItem("shift", shift));
-    setSalarymode(localStorage.getItem("salarymode", salarymode));
-    setStatus(localStorage.getItem("status", status));
-    setSalarystructure(localStorage.getItem("salarystructure", salarystructure));
-  }, []);
-  const handleUpdate = (e) => {
-    e.preventDefault();
-    console.log("Id...", id);
-    axios
-      .put(`https://646296267a9eead6fad2c898.mockapi.io/api/V1/EmpMD-PerM${id}`, {
-        fname: fname,
-        lname: lname,
-        doj: doj,
-        offrdate: offrdate,
-        etype: etype,
-        depart: depart,
-        desig: desig,
-        shift: shift,
-        salarymode: salarymode,
-        status: status,
-        salarystructure: salarystructure,
-      })
-      .then(() => {
-        navigate("/CreateMD");
-      });
-  };
-  return (
-    <Box m="20px">
-        <Header title="Employee MasterData" subtitle="Update Employee Master Data" />
-       
-        <Box display="flex" justifyContent="space-between"  
-        backgroundColor={colors.white[100]} color={colors.blue[900]}  >
-      <form>
-
-      <div className="mb-3" >
-    <label for="text">First Name:</label>
-      <input type="text" id="txct2" 
-            placeholder="Enter First Name" name="fname" required
-            onChange={(e)=>setFname(e.target.value)} />
-      <label for="pwd">Last Name:</label>
-      <input type="text" id="txt1" 
-            placeholder="Enter Last Name" name="lname" required
-            onChange={(e)=>setLname(e.target.value)} />
-
-<label for="gender">Gender:</label>
-  <select id="gender" name="gender">
-  <option value="Male">Select</option>
-    <option value="Male">Male</option>
-    <option value="Female">Female</option>
-  </select>
-  <label for="DOB">Date of Birth:</label>
-  <input type="date" id="DOB" name="DOB"></input>
-
-  <label for="DOj">Date of Joining:</label>
-  <input type="date" id="DOJ" name="DOJ" required
-              onChange={(e)=>setDoj(e.target.value)}></input>
-</div>
-<div className='mb-2'>
-  <label for="Type">Employeement Type :</label>
-  <select id="Type" name="Type" onChange={(e)=>setEtype(e.target.value)} >
-  <option value="Male">Select</option>
-    <option value="Male">Full-Time</option>
-    <option value="Female">Part-Time</option>
-  </select>
-    </div>{/*
-    <div className="mb-3 form-check">
-      <input type="checkbox" classNameName="form-check-input" id="exampleCheck1"/>
-      <label classNameName="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <button type="submit" className="btn btn-primary" >Submit</button>*/}
-<Box display="flex" justifyContent="space-between"  
-        backgroundColor={colors.white[500]} color={colors.blue[900]}>
-            <h4>Emergency Contacts</h4>
-        </Box>
-
-        <div className='mb-1'>
-    <label for="text">Name:</label>
-      <input type="text" id="txct2" 
-            placeholder="" name="fname" sx={{width:'20px', Height:'40px'}}/>
-      <label for="pwd">Relation:</label>
-      <input type="text" id="txt1" 
-            placeholder="" name="lname"/>
-            </div>
-
-            <Box display="flex" justifyContent="space-between"  
-        backgroundColor={colors.white[500]} color={colors.blue[900]}>
-            <h4>Joining Details</h4>
-        </Box>
-        <div className='mb-3' >
-    <label for="text">Job Applicant:</label>
-      <input type="text" id="txct2" 
-            placeholder="" name="fname" required />
-
-            <label for="DOB">Contract End Date:</label>
-  <input type="date" id="DOB" name="DOB" required></input>
-
-  <label for="DOB">Offer Date:</label>
-  <input type="date" id="DOB" name="DOB" required></input>
-
-  <label for="Type">Notice Days:</label>
-  <select id="Type" name="Type">
-  <option value="">Select</option>
-    <option value="">7</option>
-    <option value="">15</option>
-    <option value="">30</option>
-
-  </select></div>
-            <div className='mb-2'>
-<label for="DOB">Confirmation Date:</label>
-  <input type="date" id="DOB" name="DOB"></input>
-
-  <label for="DOB">Date of Retirement:</label>
-  <input type="date" id="DOB" name="DOB"></input>
-            </div>
-
-            <Box display="flex" justifyContent="space-between"  
-        backgroundColor={colors.white[500]} color={colors.blue[900]}>
-            <h4>Department & Grade</h4></Box>
-            <div className='mb-3' > 
-            <label for="Type">Department:</label>
-  <select id="Type" name="Type" required onChange={(e)=>setDepart(e.target.value)} >
-  <option value="">Select</option >
-    <option value="">Sales</option>
-    <option value="">Finance</option>
-    <option value="">Production</option>
-    <option value="">HR</option>
-    <option value="">Marketing</option>
-</select>
-    <label for="text">Grade:</label>
-      <input type="text" id="txct2" 
-            placeholder="" name="fname" /> 
-            <label for="text">Designation:</label>
-      <input type="text" id="txct2" 
-            placeholder="" name="fname" required onChange={(e)=>setDesig(e.target.value)} />
-            </div>
-            <div className='mb-3' >
-            <label for="text">Report to:</label>
-      <input type="text" id="txct2" 
-            placeholder="" name="fname" /> 
-            
-            <label for="text">Branch:</label>
-      <input type="text" id="txct2" 
-            placeholder="" name="fname" /> 
-            </div>
-
-            <Box display="flex" justifyContent="space-between"  
-        backgroundColor={colors.white[500]} color={colors.blue[900]}>
-            <h4>Attendance & Leave Details</h4></Box>
-            <div className='mb-2' >
-    <label for="text">Device ID:</label>
-      <input type="text" id="txct2" 
-            placeholder="" name="fname" /> 
-
-<label for="text">Holidays:</label>
-      <input type="text" id="txct2" 
-            placeholder="" name="fname" /> 
-
-<label for="Type">Default shifts:</label>
-  <select id="Type" name="Type"onChange={(e)=>setShift(e.target.value)} >
-  <option value="">Select</option>
-    <option value="">Morning</option>
-    <option value="">Evening</option>
-  </select>  </div>
-
+return(
+  <Box m="20px">
+  <Header title="MasterData" subtitle="Create Employee Master Data" />
   <Box display="flex" justifyContent="space-between"  
-        backgroundColor={colors.white[500]} color={colors.blue[900]}>
-            <h4>Bank Details</h4></Box>
-            <div className='mb-3' >
-    <label for="text">Salary Mode:</label>
-      <input type="text" id="txct2" 
-            placeholder="" name="fname" onChange={(e)=>setSalarymode(e.target.value)} /> 
-                <label for="text">Bank:</label>
-      <input type="text" id="txct2" 
-            placeholder="" name="fname" /> 
-<label for="text">Back A/C Number:</label>
-      <input type="text" id="txct2" 
-            placeholder="" name="fname" /> </div>
-            <div className='mb-3'>
-    <label for="text">Payroll Cost Center:</label>
-      <input type="text" id="txct2" 
-            placeholder="" name="fname" /> 
-    <label for="text">Provident fund Account:</label>
-      <input type="text" id="txct2" 
-            placeholder="" name="fname" /> </div>
+  backgroundColor={colors.white[500]} color={colors.blue[900]}>
+     <h4> <Box>
+    <Button
+      sx={{
+        backgroundColor: colors.white[100],
+        color: colors.blue[900],
+        fontSize: "14px",
+        fontWeight: "bold",
+        padding: "10px 20px",borderRadius:'15px', boxShadow:'1px 2px 9px #aed7f4'
+      }}
+      href='/empMD'
+    >
+      <DownloadOutlinedIcon sx={{ mr: "10px" }} />
+      Show Data
+    </Button>
+  </Box> <br></br>
+        Employee Details 
+      </h4>
+  </Box>
+  <Box display="flex" justifyContent="space-between"  
+  backgroundColor={colors.white[100]} color={colors.blue[900]}  >
+        
+  <Form className="create-form">
+  <Form.Group widths='equal'>
+    <Form.Field
+      control={Input}
+      label='First name'
+      placeholder='First name'
+      onChange={(e)=>setFname(e.target.value)}
+    />
+    <Form.Field
+      control={Input}
+      label='Last name'
+      placeholder='Last name'  onChange={(e)=>setLname(e.target.value)}
+    />
+    <Form.Field
+      control={Select}
+      label='Gender'
+      options={options}
+      placeholder='Gender'
+    /></Form.Group>
+
+<Form.Group widths='equal'>
+<Form.Field
+    type='date'
+      control={Input}
+      label='Data of birth'
+      placeholder='Enter DOJ'
+      onChange={(e)=>setDOB(e.target.value)}
+    /><Form.Field
+    type='date'
+      control={Input}
+      label='Data of joining'
+      placeholder='Enter DOJ'
+      onChange={(e)=>setDoj(e.target.value)}
+    />
+    <Form.Field
+      control={Select}
+      options={optionst}
+      label='Employeement Type'
+      placeholder='Enter Employeement type'  onChange={(e)=>setEtype(e.target.value)}
+    /></Form.Group>
+{/* 
+
+*/}
 
 <Box display="flex" justifyContent="space-between"  
-        backgroundColor={colors.white[500]} color={colors.blue[900]}>
-            <h4>Health Insurance</h4></Box>
-            <div className='mb-3' >
-    <label for="text">Provider:</label>
-      <input type="text" id="txct2" 
-            placeholder="" name="fname" /> 
-             <label for="text">Number:</label>
-      <input type="text" id="txct2" 
-            placeholder="" name="fname" /></div>
+  backgroundColor={colors.white[500]} color={colors.blue[900]}>
+      <h4>Emergency Contacts</h4>
+  </Box>
+  <Form.Group widths='equal'>
+<Form.Field
+      control={Input}
+      label='Name'
+      placeholder='Enter Name'
+      onChange={(e)=>setEmrgncyName(e.target.value)}
+    /><Form.Field
+      control={Input}
+      label='Relation'
+      placeholder=''
+      onChange={(e)=>setRelation(e.target.value)}
+    />
+   </Form.Group>
+
+      <Box display="flex" justifyContent="space-between"  
+  backgroundColor={colors.white[500]} color={colors.blue[900]}>
+      <h4>Joining Details</h4>
+  </Box>
+
+  <Form.Group widths='equal'>
+<Form.Field
+      control={Input}
+      label='Job Applicant'
+      placeholder='Enter Name'
+      onChange={(e)=>setjobapp(e.target.value)}
+    /><Form.Field
+    type='date'
+      control={Input}
+      label='Contract End Date'
+      placeholder=''
+      onChange={(e)=>setConenddate(e.target.value)}
+    />
+   <Form.Field
+    type='date'
+      control={Input}
+      label='Offer Date'
+      placeholder=''
+      onChange={(e)=>setOffrdate(e.target.value)}
+    />
+   </Form.Group>
+   <Form.Group widths='equal'>
+<Form.Field
+     control={Select}
+     options={optionsta}
+      label='Notice days'
+      placeholder='Enter Name'
+      onChange={(e)=>setNotice(e.target.value)}
+    /><Form.Field
+    type='date'
+      control={Input}
+      label='Confirmation Date'
+      placeholder=''
+      onChange={(e)=>setConfdate(e.target.value)}
+    />
+   <Form.Field
+    type='date'
+      control={Input}
+      label='Date of Retirement'
+      placeholder=''
+      onChange={(e)=>setDOR(e.target.value)}
+    />
+   </Form.Group>
+      <Box display="flex" justifyContent="space-between"  
+  backgroundColor={colors.white[500]} color={colors.blue[900]}>
+      <h4>Department & Grade</h4></Box>
+
+      <Form.Group widths='equal'>
+<Form.Field
+control={Select}
+options={optionstb}
+      label='Department'
+      placeholder=''
+      onChange={(e)=>setdepartn(e.target.value)}
+    /><Form.Field
+    control={Input}
+    label='Grade'
+    placeholder=''
+    onChange={(e)=>setGrade(e.target.value)}
+  />
+  <Form.Field
+      control={Input}
+      label='Designation'
+      placeholder=''
+      onChange={(e)=>SetDesigg(e.target.value)}
+    />
+   </Form.Group>
+
+   <Form.Group widths='equal'>
+<Form.Field
+      control={Input}
+      label='Report to'
+      placeholder=''
+      onChange={(e)=>setReportto(e.target.value)}
+    /><Form.Field
+    control={Input}
+    label='Branch'
+    placeholder=''
+    onChange={(e)=>SetBranch(e.target.value)}
+  />
+   </Form.Group>
+<Box display="flex" justifyContent="space-between"  
+  backgroundColor={colors.white[500]} color={colors.blue[900]}>
+      <h4>Attendance & Leave Details</h4></Box>
+      <Form.Group widths='equal'>
+<Form.Field
+      control={Input}
+      label='Device Id'
+      placeholder=''
+      onChange={(e)=>setDeviceid(e.target.value)}
+    /><Form.Field
+    control={Input}
+    label='Holidays'
+    placeholder=''
+    onChange={(e)=>setHolidays(e.target.value)}
+  />
+  <Form.Field
+     control={Select}
+     options={optionstc}
+      label='Default Shifts'
+      placeholder=''
+      onChange={(e)=>setShift(e.target.value)}
+    />
+   </Form.Group>
 
 <Box display="flex" justifyContent="space-between"  
-        backgroundColor={colors.white[500]} color={colors.blue[900]}>
-            <h4>Contact Details</h4></Box>
-            <div className='mb-3' >
-    <label for="text">Marital Status:</label>
-    <select id="Type" name="Type" onChange={(e)=>setStatus(e.target.value)}>
-  <option value="">Select</option>
-    <option value="">Married</option>
-    <option value="">Un-married</option>
-  </select>  
-            <label for="text">Blood Group:</label>
-    <input type="text" id="txct2" 
-            placeholder="" name="fname" />
-            <label for="text">Family Backgroud:</label>
-    <input type="text" id="txct2" 
-            placeholder="" name="fname" />
-            <label for="text">Health Details:</label>
-    <input type="text" id="txct2" 
-            placeholder="" name="fname" /></div>
-                        <div className='mb-3'>
-            <label for="text">CNIC:</label>
-    <input type="text" id="txct2" 
-            placeholder="" name="fname" />
-
-            <label for="text">Date of Issue:</label>
-            <input type="date" id="DOI" name="DOI"></input>
-
-            <label for="text">Valid Upto:</label>
-            <input type="date" id="DOI" name="DOI"></input>  </div>
-
-            <Box display="flex" justifyContent="space-between"  
-        backgroundColor={colors.white[500]} color={colors.blue[900]}>
-            <h4>Educational Qualification</h4></Box>
-            <div className='mb-3' >
-            <label for="text">School/University:</label>
-    <input type="text" id="txct2" 
-            placeholder="" name="fname" />
-            <label for="text">Qualification/Program:</label>
-    <input type="text" id="txct2" 
-            placeholder="" name="fname" />
-    <label for="text">Level:</label>
-<select id="Type" name="Type">
-  <option value="">Select</option>
-    <option value="">Graduate</option>
-    <option value="">Undergraduate</option>
-  </select>   
-  <label for="text">Year of Passing:</label>
-            <input type="date" id="DOI" name="DOI"></input>  </div>
-
-            <Box display="flex" justifyContent="space-between"  
-        backgroundColor={colors.white[500]} color={colors.blue[900]}>
-            <h4>Previous work Excperince</h4></Box>
-            <div className='mb-3' >
-            <label for="text">Company:</label>
-    <input type="text" id="txct2" 
-            placeholder="" name="fname" />
-            <label for="text">Designation:</label>
-    <input type="text" id="txct2" 
-            placeholder="" name="fname" />
-            <label for="text">Salary:</label>
-    <input type="text" id="txct2" 
-            placeholder="" name="fname" />
-            <label for="text">Address:</label>
-    <input type="text" id="txct2" 
-            placeholder="" name="fname" /></div>
-             <Box display="flex" justifyContent="space-between"  
-        backgroundColor={colors.white[500]} color={colors.blue[900]}>
-            <h4>History In Company</h4></Box>
-            <div className='mb-3' >
-            <label for="text">Branch:</label>
-    <input type="text" id="txct2" 
-            placeholder="" name="fname" />
-             <label for="text">Start Date:</label>
-            <input type="date" id="DOI" name="DOI"></input>
-            <label for="text">End Date:</label>
-            <input type="date" id="DOI" name="DOI"></input>
-            </div>
-
-            <Box display="flex" justifyContent="space-between"  
-        backgroundColor={colors.white[500]} color={colors.blue[900]}>
-            <h4>Employee Grade</h4></Box>
-            <div className='mb-3' >
-            <label for="text">Salary Structure (Default):</label>
-    <input type="text" id="txct2" 
-            placeholder="" name="fname" onChange={(e)=>setSalarystructure(e.target.value)} />
-            <label for="text">Name:</label>
-    <input type="text" id="txct2" 
-            placeholder="" name="fname" /></div>
+  backgroundColor={colors.white[500]} color={colors.blue[900]}>
+      <h4>Bank Details</h4></Box>
+      <Form.Group widths='equal'>
+<Form.Field
+   control={Select}
+   options={optionstd}
+      label='Salary Mode'
+      placeholder=''
+      onChange={(e)=>setSalarymode(e.target.value)}
+    /><Form.Field
+    control={Input}
+    label='Bank'
+    placeholder=''
+    onChange={(e)=>setBank(e.target.value)}
+  />
+  <Form.Field
+      control={Input}
+      label='Bank Account #'
+      placeholder=''
+      onChange={(e)=>setbankAcc(e.target.value)}
+    />
+   </Form.Group>
+   <Form.Group widths='equal'>
+<Form.Field
+      control={Input}
+      label='Payroll Cost Centre'
+      placeholder=''
+      onChange={(e)=>setPayrollc(e.target.value)}
+    /><Form.Field
+    control={Input}
+    label='Provident Fund Account'
+    placeholder=''
+    onChange={(e)=>setPfacc(e.target.value)}
+  />  </Form.Group>
 
 <Box display="flex" justifyContent="space-between"  
-        backgroundColor={colors.white[500]} color={colors.blue[900]}>
-            <h4>Designation & Skills</h4></Box>
-            <div className='mb-3' >
-            <label for="text">Designation:</label>
-    <input type="text" id="txct2" 
-            placeholder="" name="fname" />
-            <label for="text">Required Skills:</label>
-    <input type="text" id="txct2" 
-            placeholder="" name="fname" />
-            <label for="text">Description:</label>
-    <input type="text" id="txct2" 
-            placeholder="" name="fname" />
-            </div>
+  backgroundColor={colors.white[500]} color={colors.blue[900]}>
+      <h4>Health Insurance</h4></Box>
 
-            <Box display="flex" justifyContent="space-between"  
-        backgroundColor={colors.white[500]} color={colors.blue[900]}>
-            <h4>Exit</h4></Box>
-            <div className='mb-3'>
-            <label for="text">Resignation Letter Date:</label>
-            <input type="date" id="DOI" name="DOI"></input>
-            <label for="text">Exit In to Date:</label>
-            <input type="date" id="DOI" name="DOI"></input>
-            <label for="text">Relieving Date:</label>
-            <input type="date" id="DOI" name="DOI"></input>
-            <label for="text">Feedback:</label>
-    <input type="text" id="txct2" 
-            placeholder="" name="fname" /></div>
-            <div className='mb-3'>
-            <label for="text">New work Place:</label>
-    <input type="text" id="txct2" 
-            placeholder="" name="fname" />
-            <label for="text">Reason for Leaving:</label>
-    <input type="text" id="txct2" 
-            placeholder="" name="fname" />
-</div>
-        <button
-          type="submit"
-          className="btn btn-primary mx-2"
-          onClick={handleUpdate}
-        >
-          Update
-        </button>
-        <Link to="/empMD">
-          <button className="btn btn-secondary mx-2"> Back </button>
-        </Link>
-      </form>
-      </Box></Box>
-  );
-};
+      <Form.Group widths='equal'>
+<Form.Field
+      control={Input}
+      label='Provider'
+      placeholder=''
+      onChange={(e)=>setHprovider(e.target.value)}
+    /><Form.Field
+    control={Input}
+    label='Number'
+    placeholder=''
+    onChange={(e)=>setHnumber(e.target.value)}
+  />
+   </Form.Group>
+
+<Box display="flex" justifyContent="space-between"  
+  backgroundColor={colors.white[500]} color={colors.blue[900]}>
+      <h4>Contact Details</h4></Box>
+
+      <Form.Group widths='equal'>
+<Form.Field
+     control={Select}
+     options={optionste}
+      label='Marital Status'
+      placeholder=''
+      onChange={(e)=>setStatus(e.target.value)}
+    /><Form.Field
+    control={Input}
+    label='Blood Group'
+    placeholder=''
+    onChange={(e)=>setBldgrp(e.target.value)}
+  />
+  <Form.Field
+      control={Input}
+      label='Family Background'
+      placeholder=''
+      onChange={(e)=>setFbg(e.target.value)}
+    />
+   </Form.Group>
+   <Form.Group widths='equal'>
+<Form.Field
+      control={Input}
+      label='Health Details'
+      placeholder=''
+      onChange={(e)=>setHealthd(e.target.value)}
+    /><Form.Field
+    control={Input}
+    label='CNIC'
+    placeholder=''
+    onChange={(e)=>setCnic(e.target.value)}
+  />
+  <Form.Field
+  type='date'
+      control={Input}
+      label='Date of Issue'
+      placeholder=''
+      onChange={(e)=>setIssuedate(e.target.value)}
+    />
+    <Form.Field
+type='date'
+      control={Input}
+      label='Valid upto'
+      placeholder=''
+      onChange={(e)=>setExpdate(e.target.value)}
+    />
+   </Form.Group>
+  
+<Box display="flex" justifyContent="space-between"  
+  backgroundColor={colors.white[500]} color={colors.blue[900]}>
+      <h4>Educational Qualification</h4></Box>
+
+      <Form.Group widths='equal'>
+<Form.Field
+      control={Input}
+      label='University'
+      placeholder=''
+      onChange={(e)=>setUni(e.target.value)}
+    /><Form.Field
+    control={Input}
+    label='Qualification/Program'
+    placeholder=''
+    onChange={(e)=>setProgram(e.target.value)}
+  />
+  <Form.Field
+      control={Input}
+      label='Level'
+      placeholder=''
+      onChange={(e)=>setLevel(e.target.value)}
+    />
+   </Form.Group> 
+
+   <Form.Group widths='equal'>
+<Form.Field
+type='date'
+      control={Input}
+      label='Year of Passing'
+      placeholder=''
+      onChange={(e)=>setPassingyr(e.target.value)}
+    />
+   </Form.Group>
+   <Box display="flex" justifyContent="space-between"  
+  backgroundColor={colors.white[500]} color={colors.blue[900]}>
+      <h4>Previous work Excperince</h4></Box>
+   <Form.Group widths='equal'>
+<Form.Field
+      control={Input}
+      label='Company'
+      placeholder=''
+      onChange={(e)=>setExcomp(e.target.value)}
+    />
+     <Form.Field
+      control={Input}
+      label='Designation'
+      placeholder=''
+      onChange={(e)=>setDesig(e.target.value)}
+    />
+    <Form.Field
+    control={Input}
+    label='Salary'
+    placeholder=''
+    onChange={(e)=>setExsalary(e.target.value)}
+  />
+  <Form.Field
+    control={Input}
+    label='Address'
+    placeholder=''
+    onChange={(e)=>setAdd(e.target.value)}
+  />
+   </Form.Group>
+    
+       <Box display="flex" justifyContent="space-between"  
+  backgroundColor={colors.white[500]} color={colors.blue[900]}>
+      <h4>History In Company</h4></Box>
+    
+      <Form.Group widths='equal'>
+<Form.Field
+      control={Input}
+      label='Branch'
+      placeholder=''
+      onChange={(e)=>SetBranch(e.target.value)}
+    />
+     <Form.Field
+     type='date'
+      control={Input}
+      label='Start Date'
+      placeholder=''
+      onChange={(e)=>setStdate(e.target.value)}
+    />
+    <Form.Field
+    type='date'
+    control={Input}
+    label='End Date'
+    placeholder=''
+    onChange={(e)=>setEndate(e.target.value)}
+  />
+   </Form.Group>
+
+      <Box display="flex" justifyContent="space-between"  
+  backgroundColor={colors.white[500]} color={colors.blue[900]}>
+      <h4>Employee Grade</h4></Box>
+
+      <Form.Group widths='equal'>
+<Form.Field
+      control={Input}
+      label='Salary Structure'
+      placeholder=''
+      onChange={(e)=>setSalarystructure(e.target.value)}
+    />
+     <Form.Field
+      control={Input}
+      label='Name'
+      placeholder=''
+      onChange={(e)=>setName(e.target.value)}
+    />
+   </Form.Group>
+
+<Box display="flex" justifyContent="space-between"  
+  backgroundColor={colors.white[500]} color={colors.blue[900]}>
+      <h4>Designation & Skills</h4></Box>
+
+      <Form.Group widths='equal'>
+<Form.Field
+      control={Input}
+      label='Designation'
+      placeholder=''
+      onChange={(e)=>setDesig(e.target.value)}
+    />
+    <Form.Field
+      control={Input}
+      label='Required Skills'
+      placeholder=''
+      onChange={(e)=>setRqskills(e.target.value)}
+    />
+   <Form.Field
+      control={Input}
+      label='Description'
+      placeholder=''
+      onChange={(e)=>setDes(e.target.value)}
+    />
+   </Form.Group>
+
+      <Box display="flex" justifyContent="space-between"  
+  backgroundColor={colors.white[500]} color={colors.blue[900]}>
+      <h4>Exit</h4></Box>
+
+
+      <Form.Group widths='equal'>
+<Form.Field
+type='date'
+      control={Input}
+      label='Resignation Letter Date'
+      placeholder=''
+      onChange={(e)=>setResigdate(e.target.value)}
+    />
+     <Form.Field
+type='date'
+      control={Input}
+      label='Exit in to Date'
+      placeholder=''
+      onChange={(e)=>setExdate(e.target.value)}c
+    />
+   <Form.Field
+type='date'
+      control={Input}
+      label='Relieving Date'
+      placeholder=''
+      onChange={(e)=>setReleivingdate(e.target.value)}
+    />
+   </Form.Group>
+
+   <Form.Group widths='equal'>
+<Form.Field
+      control={Input}
+      label='Feedback'
+      placeholder=''
+      onChange={(e)=>setFeedback(e.target.value)}
+    />
+     <Form.Field
+      control={Input}
+      label='New work place '
+      placeholder=''
+      onChange={(e)=>setNewplace(e.target.value)}
+    />
+    <Form.Field
+    control={Input}
+    label='Reason for Leaving'
+    placeholder=''
+    onChange={(e)=>setReasonleaving(e.target.value)}
+  />
+   </Form.Group>
+      <Form.Field>
+              <Checkbox label='I agree to the Terms and Conditions' />
+          </Form.Field>
+<Button   
+type="submit" color='#0a1f2e' className="btn-primary"  onClick={updateAPIData} 
+>Submit</Button>
+
+</Form>
+
+</Box>
+</Box>
+)
+
+}
+
+
 export default Update;
