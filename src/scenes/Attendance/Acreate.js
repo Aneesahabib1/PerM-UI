@@ -10,19 +10,17 @@ import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 export default function Acreate() {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    const [empid, setEmpid] = useState('');
+    const [empcode, setEmpcode] = useState('');
     const [fromdate, setFromdate] = useState('');
     const [todate, setTodate] = useState('');
     const [checkbox, setCheckbox] = useState(false);
     const [reason, setReason] = useState('');
-
     const history = useNavigate();
-
-
+    
     console.log(checkbox)
     const postData = () => {
         axios.post(`https://646296267a9eead6fad2c898.mockapi.io/api/V1/Attendance`, {
-            empid,
+            empcode,
             fromdate,
             todate,
             checkbox,
@@ -59,10 +57,10 @@ export default function Acreate() {
         <Form className="create-form">
         <div className="mb-3">
 
-    <label for="text">Employee Id</label>
+    <label for="text">Employee Code</label>
       <input type="number" min="0" step="1" 
             placeholder="Enter Employee ID" name="empid" required
-            onChange={(e)=>setEmpid(e.target.value)} />
+            onChange={(e)=>setEmpcode(e.target.value)} />
       <label for="pwd">From Date:</label>
       <input type="date" id="txt1" 
              name="fromdate" required

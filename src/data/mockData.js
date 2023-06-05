@@ -94,6 +94,19 @@ export const mockData = [
   },
 ];*/
 
+export const mockDataUserRoles=[
+  {
+    id:1,
+    Rid: 1,
+    PAId: 1,
+    Createdon: "29-03-2023",
+    deleted: "Yes",
+    Createdby: "Admin",
+    access: "admin",
+
+  },
+]
+
 export const mockDataContacts = [
   {
     id: 1,

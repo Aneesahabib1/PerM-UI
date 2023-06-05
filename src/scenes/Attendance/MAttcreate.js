@@ -30,7 +30,7 @@ export default function MAttcreate() {
             lateentry,
             earlyexit,
         }).then(() => {
-            history.push('/MAttread')
+            history('/MAttread')
         })
     }
     return(
@@ -71,7 +71,7 @@ export default function MAttcreate() {
             onChange={(e)=>setDate(e.target.value)} />
 
 <Form.Field>
-                    <Checkbox label='Staus'
+                    <Checkbox label='Status'
                     onChange={(e)=>setCheckbox(e.target.value)} />
                 </Form.Field>
              

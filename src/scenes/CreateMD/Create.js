@@ -1,7 +1,7 @@
 import { colors, useTheme } from '@mui/material'
 import axios from "axios";
 import { tokens } from "../theme";
-import {React, useState} from 'react'
+import {React, useState, useEffect} from 'react'
 import Header from '../../components/Header'
 import { Box } from '@mui/material'
 import { Height } from '@mui/icons-material';
@@ -14,6 +14,7 @@ import { Button, Form, Checkbox, Input, Select } from 'semantic-ui-react'
 const Create = () => {
     const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const  [empcode, setEmpcode]= useState("");
    const  [fname, setFname]= useState("");
    const  [lname,setLname]= useState("");
    const  [gender, setGender]= useState("");
@@ -28,7 +29,7 @@ const Create = () => {
    const  [notice, setNotice]= useState("");
    const  [confdate, setConfdate]= useState("");
    const  [dor, setDOR]= useState("");
-   const  [departn, setdepartn]= useState("");
+   const  [departn, setDepartn]= useState("");
    const  [gradee, setGrade]= useState("");
    const  [desigg, SetDesigg]= useState("");
    const  [reportto, setReportto]= useState("");
@@ -58,7 +59,7 @@ const Create = () => {
    const  [exdesig, setExdesig]= useState("");
    const  [exsalary, setExsalary]= useState("");
    const  [add, setAdd]= useState("");
-   const  [exbranch, setEcxcbranch]= useState("");
+   const  [exbranch, setExbranch]= useState("");
    const  [stdate, setStdate]= useState("");
  const  [endate, setEndate]= useState("");
    const  [salarystructure, setSalarystructure]= useState("");
@@ -73,24 +74,60 @@ const Create = () => {
    const  [newplace, setNewplace]= useState("");
    const  [reasonleaving, setReasonleaving]= useState("");
 
-   const [checkbox, setCheckbox] = useState(false);
+   /*const [checkbox, setCheckbox] = useState(false);*/
+   const [isFormValid, setFormValid] = useState(false);
+   
+  useEffect(() => {
+    generateEmpcode();
+  }, []);
+  const generateEmpcode = () => {
+    const lastCode = localStorage.getItem('lastEmployeeCode');
+    if (lastCode) {
+      const lastNumber = parseInt(lastCode.split('-')[1], 10);
+      const newNumber = lastNumber + 1;
+      const code = `E-${padNumber(newNumber, 4)}`;
+      setEmpcode(code);
+    } else {
+      setEmpcode('E-0001');
+    }
+  };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Check if any required field is empty
+    if (!empcode || !fname ) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+    postData();
+  };
+  useEffect(() => {
+    setFormValid(!!empcode && !!fname  && !!doj && !!name  && !!cnic);
+  }, [empcode, fname, doj, name, cnic]);
+
+  const padNumber = (number, length) => {
+    return number.toString().padStart(length, '0');
+  };
    const options = [
+    { key: 'o', text: 'Select', value: 'Select' },
         { key: 'm', text: 'Male', value: 'male' },
         { key: 'f', text: 'Female', value: 'female' },
-        { key: 'o', text: 'Other', value: 'other' },
       ];
       const optionst = [
+        { key: 'o', text: 'Select', value: 'Select' },
         { key: 'm', text: 'Full-time', value: 'Full-time' },
         { key: 'f', text: 'Part-time', value: 'Part-time' },
     
       ]
       const optionsta = [
+        { key: 'o', text: 'Select', value: 'Select' },
         { key: 'm', text: '15 Days', value: '15 Daya' },
         { key: 'f', text: '30 Days', value: '30 Days' },
     
       ]
       const optionstb = [
+        { key: 's', text: 'Select', value: 'Select' },
         { key: 'm', text: 'Finance', value: 'Finance' },
         { key: 'f', text: 'Sales ', value: 'Part-timeC' },
         { key: 'o', text: 'Marketing ', value: 'Marketing' },
@@ -99,30 +136,24 @@ const Create = () => {
         { key: 'r', text: 'IT ', value: 'ITc' },
       ]
       const optionstc = [
+        { key: 'o', text: 'Select', value: 'Select' },
         { key: 'm', text: 'Morning', value: 'Morning' },
-        { key: 'f', text: 'Evening', value: 'Evening' },
-    
+        { key: 'f', text: 'Evening', value: 'Evening' },  
       ]
       const optionste = [
+        { key: 'o', text: 'Select', value: 'Select' },
         { key: 'm', text: 'Married', value: 'Married' },
         { key: 'f', text: 'Un-married', value: 'Un-married' },
-    
       ]
       const optionstd = [
-        { key: 'm', text: 'Monthly', value: 'Monthly' },
-        { key: 'f', text: 'Weekly', value: 'Weekly' },
-    
+        { key: 'o', text: 'Select', value: 'Select' },
+        { key: 'm', text: 'Bank', value: 'Bank' },
+        { key: 'f', text: 'Check', value: 'Check' },
       ]
-    
-      
-
    const history = useNavigate();
-
-
-  
-    console.log("clciekd");
     const postData = () => {
         axios.post (`https://646296267a9eead6fad2c898.mockapi.io/api/V1/EmpMD-PerM`, {
+          empcode: empcode,
         fname: fname,
         lname: lname,
         gender: gender,
@@ -143,6 +174,7 @@ const Create = () => {
         reportto: reportto,
         branch: branch,
         deviceid: deviceid,
+        holidays:holidays,
         shift: shift,
         salarymode: salarymode,
         bank: bank,
@@ -157,7 +189,7 @@ const Create = () => {
         healthd: healthd,
         cnic: cnic,
         issuedata: issuedata,
-        exdate: exdate,
+        expdate: expdate,
         uni: uni,
         program: program,
         level: level,
@@ -180,13 +212,17 @@ const Create = () => {
         feedback: feedback,
         newplace: newplace,
         reasonleaving: reasonleaving,
-
-      })
-      .then(() => {
-        history("/Read");
-      });
-    }
-  
+        })
+      .then(response=> {
+        const lastCode = localStorage.getItem('lastEmployeeCode');
+        if (lastCode) {
+          const lastNumber = parseInt(lastCode.split('-')[1], 10);
+          const newNumber = lastNumber + 1;
+          const code = `E-${padNumber(newNumber, 4)}`;
+          setEmpcode(code);
+          localStorage.setItem('lastEmployeeCode', code);}  
+                history("/empMD");
+      });}
   return(
         <Box m="20px">
         <Header title="MasterData" subtitle="Create Employee Master Data" />
@@ -215,21 +251,27 @@ const Create = () => {
               
         <Form className="create-form">
         <Form.Group widths='equal'>
+        <Form.Field
+            control={Input}
+            label='Employee Code' required
+            placeholder='Employee Code' type='text' value={empcode} readOnly
+          />
           <Form.Field
             control={Input}
             label='First name'
-            placeholder='First name'
+            placeholder='First name' required
             onChange={(e)=>setFname(e.target.value)}
           />
           <Form.Field
             control={Input}
-            label='Last name'
+            label='Last name' 
             placeholder='Last name'  onChange={(e)=>setLname(e.target.value)}
           />
           <Form.Field
             control={Select}
             label='Gender'
-            options={options}
+            options={options} value={gender}
+            onChange={(e)=>setGender(e.target.value)}
             placeholder='Gender'
           /></Form.Group>
 
@@ -244,7 +286,7 @@ const Create = () => {
           type='date'
             control={Input}
             label='Data of joining'
-            placeholder='Enter DOJ'
+            placeholder='Enter DOJ' required
             onChange={(e)=>setDoj(e.target.value)}
           />
           <Form.Field
@@ -265,7 +307,7 @@ const Create = () => {
 <Form.Field
             control={Input}
             label='Name'
-            placeholder='Enter Name'
+            placeholder='Enter Name' required
             onChange={(e)=>setEmrgncyName(e.target.value)}
           /><Form.Field
             control={Input}
@@ -296,7 +338,7 @@ const Create = () => {
          <Form.Field
           type='date'
             control={Input}
-            label='Offer Date'
+            label='Offer Date' 
             placeholder=''
             onChange={(e)=>setOffrdate(e.target.value)}
           />
@@ -331,19 +373,19 @@ const Create = () => {
 <Form.Field
 control={Select}
 options={optionstb}
-            label='Department'
-            placeholder=''
-            onChange={(e)=>setdepartn(e.target.value)}
+            label='Department' 
+            placeholder='' 
+            onChange={(e)=>setDepartn(e.target.value)}
           /><Form.Field
           control={Input}
           label='Grade'
-          placeholder=''
+          placeholder='' required
           onChange={(e)=>setGrade(e.target.value)}
         />
         <Form.Field
             control={Input}
             label='Designation'
-            placeholder=''
+            placeholder='' value={desigg}
             onChange={(e)=>SetDesigg(e.target.value)}
           />
          </Form.Group>
@@ -472,7 +514,7 @@ options={optionstb}
           /><Form.Field
           control={Input}
           label='CNIC'
-          placeholder=''
+          placeholder='' required
           onChange={(e)=>setCnic(e.target.value)}
         />
         <Form.Field
@@ -537,8 +579,8 @@ type='date'
            <Form.Field
             control={Input}
             label='Designation'
-            placeholder=''
-            onChange={(e)=>setDesig(e.target.value)}
+            placeholder='' value={exdesig}
+            onChange={(e)=>setExdesig(e.target.value)}
           />
           <Form.Field
           control={Input}
@@ -563,7 +605,7 @@ type='date'
             control={Input}
             label='Branch'
             placeholder=''
-            onChange={(e)=>SetBranch(e.target.value)}
+            onChange={(e)=>setExbranch(e.target.value)}
           />
            <Form.Field
            type='date'
@@ -608,7 +650,7 @@ type='date'
 <Form.Field
       control={Input}
       label='Designation'
-      placeholder=''
+      placeholder='' value={desig}
       onChange={(e)=>setDesig(e.target.value)}
     />
     <Form.Field
@@ -673,12 +715,13 @@ type='date'
           placeholder=''
           onChange={(e)=>setReasonleaving(e.target.value)}
         />
-         </Form.Group>
+         </Form.Group>{/*
             <Form.Field>
                     <Checkbox label='I agree to the Terms and Conditions' />
-                </Form.Field>
+</Form.Field>*/}
 <Button   
- type="submit" color='#0a1f2e' className="btn-primary"  onClick={postData} 
+ type="submit" disabled={!isFormValid}
+ color='#0a1f2e'  onClick={postData} 
  >Submit</Button>
 
   </Form>

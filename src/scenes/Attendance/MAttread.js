@@ -45,8 +45,22 @@ const onDelete = (id) => {
   })
 }
     return (
-        <div>
+        <Box>  
+        <Box display="flex" justifyContent="space-between" alignItems="center" >
            <Header title="Employee Attendance" subtitle="Employee Attendance List" />
+           <Box>
+          <Button 
+            sx={{
+              backgroundColor: colors.white[100],
+              color: colors.blue[900],
+              fontSize: "14px",
+              fontWeight: "bold",
+              padding: "10px 20px", borderRadius:'15px', boxShadow:'1px 2px 9px #aed7f4'
+            }}href='/MAttcreate'
+          >
+Mark New     </Button> 
+        </Box>
+      </Box>
       <Box display="flex" justifyContent="space-between"  
       backgroundColor={colors.white[500]} color={colors.blue[900]}>
         <Table singleLine>
@@ -76,19 +90,31 @@ const onDelete = (id) => {
 
            <Link to='/MAttupdate'>
   <Table.Cell> 
-  <Button primary className='ui primary button'
+  <Button primary  sx={{
+              backgroundColor: colors.white[100],
+              color: colors.blue[900],
+              fontSize: "14px",
+              fontWeight: "bold",
+              padding: "10px 20px", borderRadius:'15px', boxShadow:'1px 2px 9px #aed7f4'
+            }}
   onClick={() => setData(data)}>Update</Button>
    </Table.Cell>
 </Link>
 <Table.Cell>
-   <Button primary className='ui primary button'
+   <Button primary  sx={{
+              backgroundColor: colors.white[100],
+              color: colors.blue[900],
+              fontSize: "14px",
+              fontWeight: "bold",
+              padding: "10px 20px", borderRadius:'15px', boxShadow:'1px 2px 9px #aed7f4'
+            }}
     onClick={() => onDelete(data.id)}>Delete</Button>
    </Table.Cell>
         </Table.Row>
    )})}
 </Table.Body></Table>
 </Box>
-        </div>
+        </Box>
     )
 }
 export default MAttread;

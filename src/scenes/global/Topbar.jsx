@@ -41,7 +41,7 @@ const Topbar=()=>{
 }
 export default Topbar;*/
 
-import { Box, IconButton, useTheme } from "@mui/material";
+import { Box, IconButton, useTheme, Button } from "@mui/material";
 import { useContext } from "react";
 import { ColorModeContext, tokens } from "../theme";
 import InputBase from "@mui/material/InputBase";
@@ -51,11 +51,16 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from "@mui/icons-material/Search";
+import { Logout } from "@mui/icons-material";
+import { useAuth0 } from "@auth0/auth0-react";
+
+
 
 const Topbar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
+  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
 
   return (
     <Box display="flex" justifyContent="space-between" p={2}>
@@ -71,7 +76,7 @@ const Topbar = () => {
         </IconButton>
       </Box>
 
-      <Box display="flex">
+      <Box display="flex" color={"#0a1f2e"}>
         <IconButton onClick={colorMode.toggleColorMode}>
           {theme.palette.mode === "dark" ? (
             <DarkModeOutlinedIcon  sx={{ color: colors.blue[900]}}
@@ -85,10 +90,17 @@ const Topbar = () => {
         </IconButton>
         <IconButton>
           <SettingsOutlinedIcon sx={{ color: colors.blue[900]}}/>
-        </IconButton>
-        <IconButton>
-          <PersonOutlinedIcon sx={{ color: colors.blue[900]}}/>
-        </IconButton>
+        </IconButton>{/*
+        {isAuthenticated && (
+           <li>  <p > {user.name} </p></li>
+          )}
+{isAuthenticated ? (
+        <IconButton onClick={() => logout({ returnTo: window.location.origin })}>
+        <Logout sx={{ color: colors.blue[900] }} />
+      </IconButton>) : (
+      <IconButton onClick={() => loginWithRedirect()}>*/}<IconButton>
+        <PersonOutlinedIcon sx={{ color: colors.blue[900] }} />
+      </IconButton>        
       </Box>
       
     </Box>

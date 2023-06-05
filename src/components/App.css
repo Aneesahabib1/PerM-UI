@@ -1,36 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Source+Sans+Pro:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Source+Sans+Pro:wght@400;600;700&family=Source+Serif+Pro:ital,wght@0,400;1,300&display=swap');
 
-html,
-body,
-#root,
-.app,
-
-
-
-.content{
-  height: 100%;
-  width: 100%;
-  font-family: 'Source Sans Pro', sans-serif;
-}
-.app{
-  display: flex;
-  position: relative;
-}
-::-webkit-scrollbar{
-  width: 15px;
+* > * {
+    font-family: "Poppins", cursive;
+    margin: 0;
 }
 
-::-webkit-scrollbar-track{
-  background: #e0e0e0;
+body{
+  background: #2a7db6;  /* 
+  /* background-image: url('./blur.png');
+  /*background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 
+  background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
 }
 
-::-webkit-scrollbar-thumb{
-  background: #888 ;
-}
-
-::-webkit-scrollbar-track :hover{
-  background: #555;
-}
 .App {
   height: 100vh;
   display: flex;
@@ -70,12 +52,12 @@ body,
 }
 
 #form > .btn{
-  background-color: #f8f9ff;
-  color: #0a1f2e;
-  font-size: 14px;
+  background-color: #2a7db6;
+  color: #fdfdff;
+  font-size: 1em;
   cursor: pointer;
  border-radius: 15px;
- box-shadow: 1px 2px 9px #aed7f4;
+ /*box-shadow: 1px 2px 9px #aed7f4;*/
 }
 
 .flex{
@@ -101,7 +83,6 @@ body,
   border-bottom-right-radius: 5px;
   display: none;
 }
-
 
 @media screen and (min-width: 860px)  {
   .register .col-2 img{

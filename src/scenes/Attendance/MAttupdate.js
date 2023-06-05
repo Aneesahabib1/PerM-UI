@@ -79,10 +79,10 @@ const MAttupdate = () => {
 
 <label for="text">Employee Id</label>
   <input type="number" min="0" step="1" 
-        placeholder="Enter Employee ID" name="empid" required
+        placeholder="Enter Employee ID" name="empid" required value={empid}
         onChange={(e)=>setEmpid(e.target.value)} />
   <label for="pwd">Date:</label>
-  <input type="date" id="txt1" 
+  <input type="date" id="txt1" value={date}
          name="fromdate" required
         onChange={(e)=>setDate(e.target.value)} />
 
@@ -92,7 +92,7 @@ const MAttupdate = () => {
             </Form.Field>
          
          <label for="Type">Shift:</label>
-<select id="Type" name="Type" onChange={(e)=>setEarlyExit(e.target.value)} >
+<select id="Type" name="Type" onChange={(e)=>setShift(e.target.value)} value={shift} >
 <option value="">Select</option>
 <option value="Morning">Morning</option>
 <option value="Evening">Evening</option>
@@ -101,13 +101,13 @@ const MAttupdate = () => {
 
 
 <label for="Type">Late Entry:</label>
-<select id="Type" name="Type" onChange={(e)=>setLateentry(e.target.value)} >
+<select id="Type" name="Type" onChange={(e)=>setLateentry(e.target.value)} value={lateentry} >
 <option value="">Select</option>
 <option value="Yes">Yes</option>
 <option value="No">No</option>
 </select>
 <label for="Type">Early Exit:</label>
-<select id="Type" name="Type" onChange={(e)=>setEarlyExit(e.target.value)} >
+<select id="Type" name="Type" onChange={(e)=>setEarlyExit(e.target.value)} value={earlyexit} >
 <option value="">Select</option>
 <option value="Yes">Yes</option>
 <option value="No">No</option>

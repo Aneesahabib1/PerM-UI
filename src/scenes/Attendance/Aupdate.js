@@ -72,17 +72,17 @@ const Aupdate = () => {
     <Form className="create-form">
       <div className="mb-3">
 <label for="text">Employee Id</label>
-  <input type="number" min="0" step="1" c
+  <input type="number" min="0" step="1" value={empid}
         placeholder="Enter Employee ID" name="empid" required
         onChange={(e)=>setEmpid(e.target.value)} />
   <label for="pwd">From Date:</label>
-  <input type="date" id="txt1" 
+  <input type="date" id="txt1" value={fromdate}
          name="fromdate" required
         onChange={(e)=>setFromdate(e.target.value)} />
 
 <label for="">To Date:</label>
 <input type="date" id="txt1" 
-         name="todate" required
+         name="todate" required value={todate}
         onChange={(e)=>setTodate(e.target.value)} />
          <Form.Field>
                 <Checkbox label='Half day'
@@ -90,7 +90,7 @@ const Aupdate = () => {
             </Form.Field>
 
 <label for="text">Reason:</label>
-  <input type="text" id="txct2" 
+  <input type="text" id="txct2" value={reason}
         placeholder="" name="reason" sx={{width:'20px', Height:'40px'}}
         onChange={(e)=>setReason(e.target.value)}/>
         </div>

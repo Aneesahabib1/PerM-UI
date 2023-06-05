@@ -306,21 +306,18 @@ const Read=()=> {
   }, []);
 
   const setData = (data) => {
-    let { id, fname, lname, doj, offrdate, 
-      etype, depart, desig, shift, salarymode, 
-      status, salarystructure } = data;
+    let { id, empcode, fname, lname, offrdate, doj, departn,
+        desigg,  salarymode, 
+     } = data;
       localStorage.setItem('id', id);
+      localStorage.setItem('empcode', empcode);
       localStorage.setItem('fname', fname);
       localStorage.setItem('lname', lname);
-      localStorage.setItem('doj', doj);
       localStorage.setItem('offrdate', offrdate);
-      localStorage.setItem('etype', etype);
-      localStorage.setItem('depart', depart);
-      localStorage.setItem('desig', desig);
-      localStorage.setItem('shift', shift);
+      localStorage.setItem('doj', doj);
+localStorage.setItem('departn',departn);
+      localStorage.setItem('desigg', desigg);
       localStorage.setItem('salarymode', salarymode);
-      localStorage.setItem('status', status);
-      localStorage.setItem('salarystructure', salarystructure);
 
 }
 
@@ -337,59 +334,80 @@ const onDelete = (id) => {
   })
 }
     return (
-        <div>
-           <Header title="Employee MasterData" subtitle="Employee Master Data" />
+<Box>    
+         <Box display="flex" justifyContent="space-between" alignItems="center" >   
+     <Header title="Employee MasterData" subtitle="Employee Master Data" />
+     <Box>
+          <Button 
+            sx={{
+              backgroundColor: colors.white[100],
+              color: colors.blue[900],
+              fontSize: "14px",
+              fontWeight: "bold",
+              padding: "10px 20px", borderRadius:'15px', boxShadow:'1px 2px 9px #aed7f4'
+            }}href='/CreateMD'
+          >
+Create Employee          </Button> 
+        </Box>
+      </Box>
       <Box display="flex" justifyContent="space-between"  
       backgroundColor={colors.white[500]} color={colors.blue[900]}>
         <Table singleLine>
                 <Table.Header>
                     <Table.Row>
                     <Table.HeaderCell>Id</Table.HeaderCell>
-
+                    <Table.HeaderCell>Employee Code</Table.HeaderCell>
                         <Table.HeaderCell>First Name</Table.HeaderCell>
                         <Table.HeaderCell>Last Name</Table.HeaderCell>
                         <Table.HeaderCell>Date of Joining</Table.HeaderCell>
                         <Table.HeaderCell>Offer Date</Table.HeaderCell>
-                        <Table.HeaderCell>Gender</Table.HeaderCell>
+                        <Table.HeaderCell>Department</Table.HeaderCell>
                         <Table.HeaderCell>Designation</Table.HeaderCell>
                         <Table.HeaderCell>Salary Mode</Table.HeaderCell>
-                        <Table.HeaderCell>Salary Struture</Table.HeaderCell>
                         <Table.HeaderCell>Update</Table.HeaderCell>
                         <Table.HeaderCell>Delete</Table.HeaderCell>
-
-
-
                     </Table.Row>
                 </Table.Header>
            <Table.Body>
   {APIData.map((data) => {
      return (
-      
        <Table.Row>
           <Table.Cell>{data.id}</Table.Cell>
+          <Table.Cell>{data.empcode}</Table.Cell>
            <Table.Cell>{data.fname}</Table.Cell>
            <Table.Cell>{data.lname}</Table.Cell>
            <Table.Cell>{data.doj}</Table.Cell>
            <Table.Cell>{data.offrdate}</Table.Cell>
-           <Table.Cell>{data.etype}</Table.Cell>
-           <Table.Cell>{data.desig}</Table.Cell>
+           <Table.Cell>{data.departn}</Table.Cell>
+           <Table.Cell>{data.desigg}</Table.Cell>
            <Table.Cell>{data.salarymode}</Table.Cell>
-           <Table.Cell>{data.salarystructure}</Table.Cell>
            <Link to='/Update'>
   <Table.Cell> 
-  <Button primary className='ui primary button'
+  <Button sx={{
+              backgroundColor: colors.white[100],
+              color: colors.blue[900],
+              fontSize: "14px",
+              fontWeight: "bold",
+              padding: "10px 20px", borderRadius:'15px', boxShadow:'1px 2px 9px #aed7f4'
+            }}
   onClick={() => setData(data)}>Update</Button>
    </Table.Cell>
 </Link>
 <Table.Cell>
-   <Button primary className='ui primary button'
+   <Button sx={{
+              backgroundColor: colors.white[100],
+              color: colors.blue[900],
+              fontSize: "14px",
+              fontWeight: "bold",
+              padding: "10px 20px", borderRadius:'15px', boxShadow:'1px 2px 9px #aed7f4'
+            }}
     onClick={() => onDelete(data.id)}>Delete</Button>
    </Table.Cell>
         </Table.Row>
    )})}
 </Table.Body></Table>
 </Box>
-        </div>
+        </Box>
     )
 }
 export default Read;

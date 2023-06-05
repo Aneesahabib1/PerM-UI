@@ -38,32 +38,28 @@ export default function CreateTask() {
             assignedby,
             typeid,
         }).then(() => {
-            history.push('/ReadTask')
+            history('/ReadTask')
         })
     }
     return(
         <Box m="20px">
+                    <Box display="flex" justifyContent="space-between" alignItems="center" > 
         <Header title="Employee Tasks" subtitle="Create & Assign Tasks" />
-        <Box display="flex" justifyContent="space-between"  
-        backgroundColor={colors.white[500]} color={colors.blue[900]}>
-           <h4> <Box>
-          <Button
+        <Box>
+          <Button 
             sx={{
               backgroundColor: colors.white[100],
               color: colors.blue[900],
               fontSize: "14px",
               fontWeight: "bold",
-              padding: "10px 20px",borderRadius:'15px', boxShadow:'1px 2px 9px #aed7f4'
-            }}
-            href='/ReadTask'
+              padding: "10px 20px", borderRadius:'15px', boxShadow:'1px 2px 9px #aed7f4'
+            }}href='/ReadTask'
           >
-            <DownloadOutlinedIcon sx={{ mr: "10px" }} />
-            Show Data
-          </Button>
-        </Box> <br></br>
-              Employee Tasks 
-            </h4>
+Show Tasks          </Button> 
         </Box>
+      </Box>
+          Employee Tasks 
+            
         <Box display="flex" justifyContent="space-between"  
         backgroundColor={colors.white[100]} color={colors.blue[900]}  >   
         <Form className="create-form">
@@ -112,7 +108,7 @@ export default function CreateTask() {
 
 <label for="text">Assigned to:</label>
       <input type="text" id="txct2" 
-            placeholder="" name="reason" sx={{width:'20px', Height:'40px'}}
+            placeholder="" name="reason" sx={{width:'20px', Height:'40px'}} required
             onChange={(e)=>setAssignedto(e.target.value)}/>
 
 <label for="text">Assigned by:</label>

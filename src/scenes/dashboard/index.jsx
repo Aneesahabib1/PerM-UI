@@ -119,11 +119,7 @@ const Dashboard = () => {
               />
             }
           />
-        </Box>
-
-
-
-        
+        </Box>   
         <Box
           gridColumn="span 6"
           gridRow="span 2"
@@ -141,13 +137,11 @@ const Dashboard = () => {
             <BarChart isDashboard={true} />
           </Box>
             </Box>
-        
         <Box
         gridColumn="span 6"
         gridRow="span 2"
         backgroundColor={colors.white[100]} boxShadow='1px 2px 9px #d6ebfa' borderRadius='25px'
         >
-          
               <Typography
               variant="h3"
               fontWeight="bold" color={colors.blue[900]}
@@ -174,7 +168,9 @@ const Dashboard = () => {
               <Box height="250px" m="-20px 0 0 0">
             <BarChart2 isDashboard={true} />
           </Box>
+          
             </Box>
+            
         
         </Box></Box>
         
