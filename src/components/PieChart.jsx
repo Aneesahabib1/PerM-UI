@@ -188,13 +188,21 @@ const PieChart = () => {
 
   return (
     
-    <div>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '400px',
+      }}
+    >
+      <div style={{ width: '400px' }}>
 
       {chartData.labels && chartData.labels.length > 0 ? (
         <Pie data={chartData} />
       ) : (
         <p>Loading...</p>
-      )}
+      )}</div>
     </div>
   );
 };
