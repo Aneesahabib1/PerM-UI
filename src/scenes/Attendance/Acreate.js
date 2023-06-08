@@ -31,7 +31,7 @@ export default function Acreate() {
     }
     return(
         <Box m="20px">
-        <Header title="Employee Attendance" subtitle="Create Attendance Request" />
+        <Header title="Employee Attendance Request"  />
         <Box display="flex" justifyContent="space-between"  
         backgroundColor={colors.white[500]} color={colors.blue[900]}>
            <h4> <Box>
@@ -49,7 +49,6 @@ export default function Acreate() {
             Show Data
           </Button>
         </Box> <br></br>
-              Request Attendance 
             </h4>
         </Box>
         <Box display="flex" justifyContent="space-between"  

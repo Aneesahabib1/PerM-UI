@@ -61,6 +61,7 @@ const UserRole =()=>{
                     border: "none",
                   },
                   "& .MuiDataGrid-cell": {
+                    
                     borderBottom: "none",
                   },
                   "& .name-column--cell": {
@@ -75,10 +76,10 @@ const UserRole =()=>{
                   },
                   "& .MuiDataGrid-footerContainer": {
                     borderTop: "none",
-                    backgroundColor: colors.blueAccent[700],
+                    backgroundColor: colors.blue[900],
                   },
                   "& .MuiCheckbox-root": {
-                    color: `${colors.greenAccent[200]} !important`,
+                    color: `${colors.white[200]} !important`,
                   },
                 }}    >
                 <DataGrid checkboxSelection rows={mockDataUserRoles} columns={columns} />

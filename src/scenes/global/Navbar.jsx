@@ -50,8 +50,6 @@ const Navbar = () => {
   const [open, setOpen] = React.useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
-  
-
 
   return (
     
@@ -114,43 +112,41 @@ const Navbar = () => {
 <Typography
               variant="h6"
               color={colors.grey[300]}
-              sx={{ m: "25px 0 5px 20px" }}>   </Typography>
-              <Box sx={{borderRadius:'15px', boxShadow:'1px 2px 9px #d6ebfa',backgroundColor:colors.white[100]}}>
-            <Item 
-              title="Profile"
-              to="/Profile"
-              icon={<AccountCircleIcon
-                />}
-              selected={selected}
-          setSelected={setSelected} /></Box>
-          <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "25px 0 5px 20px" }}>   </Typography>
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+               Employee
+            </Typography>
             <Box  sx={{borderRadius:'15px', boxShadow:'1px 2px 9px #d6ebfa', color:colors.blue[900], backgroundColor:colors.white[100]}}>
             <SubMenu 
               title="Employee"  color='#0a1f2e'
               icon={<PeopleOutlinedIcon />} 
               selected={selected}   setSelected={setSelected}>
-     <Typography sx={{ m: "25px 0 5px 20px" }}>  </Typography>
 
+                 <Typography sx={{ m: "25px 0 5px 20px" }}>  </Typography>
+<Box sx={{borderRadius:'15px', boxShadow:'1px 2px 9px #d6ebfa',backgroundColor:colors.white[100]}}>
+         <MenuItem selected={selected}   setSelected={setSelected}
+          icon={<AccountCircleIcon/>}> <Link to="/empMD">Master Data</Link></MenuItem>
+         </Box>
+
+     <Typography sx={{ m: "25px 0 5px 20px" }}>  </Typography>
      <Box sx={{borderRadius:'15px', boxShadow:'1px 2px 9px #d6ebfa',backgroundColor:colors.white[100]}}>
-              <MenuItem selected={selected}   setSelected={setSelected} icon={<AccountCircleIcon/>}>Profile</MenuItem>
+              <MenuItem selected={selected}   setSelected={setSelected}
+               icon={<AccountCircleIcon/>}> <Link to="/MAttread">Attendance</Link></MenuItem>
               </Box>
               <Typography sx={{ m: "25px 0 5px 20px" }}>  </Typography>
-             {/* <Box sx={{borderRadius:'15px', boxShadow:'1px 2px 9px #d6ebfa',backgroundColor:colors.white[100]}}>
-              <MenuItem selected={selected}   setSelected={setSelected} icon={<StorageIcon/>} containerElement={<Link to="/index" />} >Master data</MenuItem>
-          </Box>*/}
+             
               <Typography sx={{ m: "25px 0 5px 20px" }}>  </Typography>
               <Box sx={{borderRadius:'15px', boxShadow:'1px 2px 9px #d6ebfa',backgroundColor:colors.white[100]}}>
-              <MenuItem selected={selected}   setSelected={setSelected} icon={<EventNoteIcon />}>Attendance</MenuItem>
+              <MenuItem selected={selected}   setSelected={setSelected} 
+               icon={<EventNoteIcon />}><Link to="/Aread">Requested Attendance</Link></MenuItem>
               </Box>
               <Typography sx={{ m: "25px 0 5px 20px" }}>  </Typography>
               <Box sx={{borderRadius:'15px', boxShadow:'1px 2px 9px #d6ebfa',backgroundColor:colors.white[100]}}>
-              <MenuItem selected={selected}   setSelected={setSelected} icon={<AssignmentIcon />}>Task</MenuItem>
+              <MenuItem selected={selected}   setSelected={setSelected} icon={<AssignmentIcon />}>
+                <Link to ='/ReadTask'>Task</Link></MenuItem>
 </Box>                 <span></span>
               </SubMenu>  </Box>
-            <Typography sx={{ m: "25px 0 5px 20px" }}>  </Typography>
+            <Typography sx={{ m: "25px 0 5px 20px" }}>  </Typography>{/*
             <Typography
               variant="h6"
               color={colors.grey[300]}
@@ -202,7 +198,7 @@ const Navbar = () => {
               title="Task"
               to="/ReadTask"
               icon={<AssignmentIcon />} />
-            </Box>
+              </Box>*/}
 
             
            {/* 
@@ -236,6 +232,59 @@ const Navbar = () => {
               to="/ReadDepartment"
               icon={<AssignmentIcon />} />
             </Box>
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+               Charts
+            </Typography>
+            <Box  sx={{borderRadius:'15px', boxShadow:'1px 2px 9px #d6ebfa', color:colors.blue[900], backgroundColor:colors.white[100]}}>
+            <SubMenu 
+              title="Charts"  color='#0a1f2e'
+              icon={<PeopleOutlinedIcon />} 
+              selected={selected}   setSelected={setSelected}>
+
+                 <Typography sx={{ m: "25px 0 5px 20px" }}>  </Typography>
+<Box sx={{borderRadius:'15px', boxShadow:'1px 2px 9px #d6ebfa',backgroundColor:colors.white[100]}}>
+         <MenuItem selected={selected}   setSelected={setSelected}
+          icon={<BarChartIcon/>}> <Link to="/bar">Employee Count</Link></MenuItem>
+         </Box>
+
+     <Typography sx={{ m: "25px 0 5px 20px" }}>  </Typography>
+     <Box sx={{borderRadius:'15px', boxShadow:'1px 2px 9px #d6ebfa',backgroundColor:colors.white[100]}}>
+              <MenuItem selected={selected}   setSelected={setSelected}
+               icon={<PieChartOutlineOutlinedIcon/>}> <Link to="/Pie">Task Count</Link></MenuItem>
+              </Box>
+              <Typography sx={{ m: "25px 0 5px 20px" }}>  </Typography>
+             
+              <Typography sx={{ m: "25px 0 5px 20px" }}>  </Typography>
+              <Box sx={{borderRadius:'15px', boxShadow:'1px 2px 9px #d6ebfa',backgroundColor:colors.white[100]}}>
+              <MenuItem selected={selected}   setSelected={setSelected} 
+               icon={<TimelineOutlinedIcon />}><Link to="/Line">Line Chart</Link></MenuItem>
+              </Box>
+              <Typography sx={{ m: "25px 0 5px 20px" }}>  </Typography>
+              <Box sx={{borderRadius:'15px', boxShadow:'1px 2px 9px #d6ebfa',backgroundColor:colors.white[100]}}>
+              <MenuItem selected={selected}   setSelected={setSelected} icon={<BarChartIcon />}>
+                <Link to ='/bar2'>Attendance</Link></MenuItem>
+</Box>                 <span></span>
+              </SubMenu>  </Box>
+              <Typography sx={{ m: "25px 0 5px 20px" }}>  </Typography>
+
+<Box sx={{borderRadius:'15px', boxShadow:'1px 2px 9px #d6ebfa',backgroundColor:colors.white[100]}}>
+            <Item 
+              title="User Roles"
+              to="/UserRole"
+              icon={<AccountCircleIcon
+                />}
+              selected={selected}
+          setSelected={setSelected} /></Box>
+          <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "25px 0 5px 20px" }}>   </Typography>
+
+
 {/*
       <Typography
               variant="h6"
@@ -263,76 +312,10 @@ const Navbar = () => {
               icon={<FeedbackIcon />}
               selected={selected}
               setSelected={setSelected}/></Box>
-<Typography sx={{ m: "25px 0 5px 20px" }}>  </Typography>
-<Typography></Typography>
-<Box sx={{borderRadius:'15px', boxShadow:'1px 2px 9px #d6ebfa',backgroundColor:colors.white[100]}}>
-            <Item 
-              title="User Roles"
-              to="/UserRole"
-              icon={<AccountCircleIcon
-                />}
-              selected={selected}
-          setSelected={setSelected} /></Box>
-          <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "25px 0 5px 20px" }}>   </Typography>
 
-<Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Charts
-            </Typography>
-            <Box sx={{borderRadius:'15px', boxShadow:'1px 2px 9px #d6ebfa',backgroundColor:colors.white[100]}}>
 
-            <Item
-              title="Employee Count"
-              to="/bar"
-              icon={<BarChartOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            /></Box>
-<Typography sx={{ m: "25px 0 5px 20px" }}>  </Typography>
-            <Box sx={{borderRadius:'15px', boxShadow:'1px 2px 9px #d6ebfa',backgroundColor:colors.white[100]}}>            <Item
-              title="Task Count"
-              to="/Pie"
-              icon={<PieChartOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            /></Box>
-            <Typography sx={{ m: "25px 0 5px 20px" }}>  </Typography>
-            <Box sx={{borderRadius:'15px', boxShadow:'1px 2px 9px #d6ebfa',backgroundColor:colors.white[100]}}>            <Item
-              title="Line Chart"
-              to="/Line"
-              icon={<TimelineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            /></Box>
-            <Typography sx={{ m: "25px 0 5px 20px" }}>  </Typography>
-            <Box sx={{borderRadius:'15px', boxShadow:'1px 2px 9px #d6ebfa',backgroundColor:colors.white[100]}}>            <Item
-              title="Attendance"
-              to="/bar2"
-              icon={<BarChartOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            </Box>
-            <Typography sx={{ m: "25px 0 5px 20px" }}>  </Typography>
 
-            <Button 
-            sx={{
-              backgroundColor: colors.white[100],
-              color: colors.blue[900],
-              fontSize: "14px",
-              fontWeight: "bold",
-              padding: "10px 90px", borderRadius:'15px', boxShadow:'1px 2px 9px #aed7f4'
-            }} href='/'
-          >
-            <LogoutIcon sx={{ mr: "10px" }} />
-            Logout
-          </Button>
+
         </Menu>
       </ProSidebar>
     </Box>  

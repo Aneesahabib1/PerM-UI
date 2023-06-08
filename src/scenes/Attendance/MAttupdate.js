@@ -18,6 +18,7 @@ const MAttupdate = () => {
     const  [empid, setEmpid]= useState("");
      const  [date,setDate]= useState("");
      const  [shift,setShift]= useState("");
+     const [status, setStatus] = useState('');
      const  [checkbox, setCheckbox]= useState("");
      const  [lateentry, setLateentry]= useState("");
      const  [earlyexit, setEarlyExit]= useState("");
@@ -29,6 +30,7 @@ const MAttupdate = () => {
     setDate(localStorage.getItem("date", date));
     setCheckbox(localStorage.getItem("checkbox", checkbox));
     setShift(localStorage.getItem("shift", shift));
+    setStatus(localStorage.getItem("status", status));
     setLateentry(localStorage.getItem("lateentry", lateentry));
     setEarlyExit(localStorage.getItem("earlyexit", earlyexit));
 
@@ -41,6 +43,7 @@ const MAttupdate = () => {
       date: date,
       checkbox: checkbox,
       shift: shift,
+      status,
       lateentry: lateentry,
       earlyexit: earlyexit,
 
@@ -98,7 +101,15 @@ const MAttupdate = () => {
 <option value="Evening">Evening</option>
 </select>
 
+<label for="Type">Status</label>
+<select id="Type" name="Type" onChange={(e)=>setStatus(e.target.value)} >
+<option value="">Select</option>
+<option value="Present">Present</option>
+<option value="Leave">Leave</option>
+<option value="Sick-Leave">Sick-leave</option>
+<option value="On-duty">On-duty</option>
 
+</select>
 
 <label for="Type">Late Entry:</label>
 <select id="Type" name="Type" onChange={(e)=>setLateentry(e.target.value)} value={lateentry} >

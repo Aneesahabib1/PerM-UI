@@ -1,13 +1,13 @@
 import React, { useEffect, useState  } from 'react';
 import { Table, checkbox } from 'semantic-ui-react'
 import axios from 'axios';
-import {Box, Button} from "@mui/material";
+import {Box, Button, IconButton} from "@mui/material";
 import Header from '../../components/Header'
 import { colors, useTheme } from '@mui/material'
 import { tokens } from "../theme";
 import { Link } from 'react-router-dom';
-
-
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 const ReadDepartment=()=> {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -73,8 +73,8 @@ Add Department   </Button>
                         <Table.HeaderCell>Deleted</Table.HeaderCell>
                         <Table.HeaderCell>Created by</Table.HeaderCell>
                         <Table.HeaderCell>Created on</Table.HeaderCell>
-                        <Table.HeaderCell></Table.HeaderCell>
-                        <Table.HeaderCell></Table.HeaderCell>
+                        <Table.HeaderCell>Update</Table.HeaderCell>
+                        <Table.HeaderCell>Delete</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
            <Table.Body>
@@ -92,6 +92,9 @@ Add Department   </Button>
 
            <Link to='/UpdateDepartment'>
   <Table.Cell> 
+  <IconButton  onClick={() => setData(data)}>
+        <EditIcon sx={{ color: colors.blue[900] }} />
+      </IconButton>{/*
   <Button 
    sx={{
     backgroundColor: colors.white[100],
@@ -100,10 +103,13 @@ Add Department   </Button>
     fontWeight: "bold",
     padding: "10px 20px", borderRadius:'15px', boxShadow:'1px 2px 9px #aed7f4'
   }}
-  onClick={() => setData(data)}>Update</Button>
+onClick={() => setData(data)}>Update</Button>*/}
    </Table.Cell>
 </Link>
 <Table.Cell>
+<IconButton  onClick={() => onDelete(data.id)}>
+        <DeleteIcon sx={{ color: colors.blue[900] }} />
+      </IconButton>  {/*      
    <Button  sx={{
               backgroundColor: colors.white[100],
               color: colors.blue[900],
@@ -111,7 +117,7 @@ Add Department   </Button>
               fontWeight: "bold",
               padding: "10px 20px", borderRadius:'15px', boxShadow:'1px 2px 9px #aed7f4'
             }}
-    onClick={() => onDelete(data.id)}>Delete</Button>
+          onClick={() => onDelete(data.id)}>Delete</Button>*/}
    </Table.Cell>
         </Table.Row>
    )})}

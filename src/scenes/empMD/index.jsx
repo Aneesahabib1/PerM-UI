@@ -285,12 +285,13 @@ export default Read;*/
 import React, { useEffect, useState  } from 'react';
 import { Table, checkbox } from 'semantic-ui-react'
 import axios from 'axios';
-import {Box, Button} from "@mui/material";
+import {Box, Button, IconButton} from "@mui/material";
 import Header from '../../components/Header'
 import { colors, useTheme } from '@mui/material'
 import { tokens } from "../theme";
 import { Link } from 'react-router-dom';
-
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const Read=()=> {
   const theme = useTheme();
@@ -383,6 +384,9 @@ Create Employee          </Button>
            <Table.Cell>{data.salarymode}</Table.Cell>
            <Link to='/Update'>
   <Table.Cell> 
+  <IconButton  onClick={() => setData(data)}>
+        <EditIcon sx={{ color: colors.blue[900] }} />
+      </IconButton>{/*
   <Button sx={{
               backgroundColor: colors.white[100],
               color: colors.blue[900],
@@ -390,10 +394,13 @@ Create Employee          </Button>
               fontWeight: "bold",
               padding: "10px 20px", borderRadius:'15px', boxShadow:'1px 2px 9px #aed7f4'
             }}
-  onClick={() => setData(data)}>Update</Button>
+          onClick={() => setData(data)}>Update</Button>*/}
    </Table.Cell>
 </Link>
 <Table.Cell>
+<IconButton  onClick={() => onDelete(data.id)}>
+        <DeleteIcon sx={{ color: colors.blue[900] }} />
+      </IconButton>{/*
    <Button sx={{
               backgroundColor: colors.white[100],
               color: colors.blue[900],
@@ -401,7 +408,7 @@ Create Employee          </Button>
               fontWeight: "bold",
               padding: "10px 20px", borderRadius:'15px', boxShadow:'1px 2px 9px #aed7f4'
             }}
-    onClick={() => onDelete(data.id)}>Delete</Button>
+          onClick={() => onDelete(data.id)}>Delete</Button>*/}
    </Table.Cell>
         </Table.Row>
    )})}

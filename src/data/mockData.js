@@ -97,8 +97,8 @@ export const mockData = [
 export const mockDataUserRoles=[
   {
     id:1,
-    Rid: 1,
-    PAId: 1,
+    Uname: 'Faris',
+    Rname: 'Admin',
     Createdon: "29-03-2023",
     deleted: "Yes",
     Createdby: "Admin",

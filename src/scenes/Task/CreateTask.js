@@ -43,8 +43,8 @@ export default function CreateTask() {
     }
     return(
         <Box m="20px">
-                    <Box display="flex" justifyContent="space-between" alignItems="center" > 
-        <Header title="Employee Tasks" subtitle="Create & Assign Tasks" />
+      <Box display="flex" justifyContent="space-between" alignItems="center" > 
+        <Header title="Employee Tasks" />
         <Box>
           <Button 
             sx={{
@@ -57,9 +57,7 @@ export default function CreateTask() {
           >
 Show Tasks          </Button> 
         </Box>
-      </Box>
-          Employee Tasks 
-            
+      </Box>            
         <Box display="flex" justifyContent="space-between"  
         backgroundColor={colors.white[100]} color={colors.blue[900]}  >   
         <Form className="create-form">

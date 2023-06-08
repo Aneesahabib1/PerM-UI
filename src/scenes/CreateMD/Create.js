@@ -225,9 +225,8 @@ const Create = () => {
       });}
   return(
         <Box m="20px">
-        <Header title="MasterData" subtitle="Create Employee Master Data" />
-        <Box display="flex" justifyContent="space-between"  
-        backgroundColor={colors.white[500]} color={colors.blue[900]}>
+       <Box display="flex" justifyContent="space-between" alignItems="center" > 
+        <Header title="MasterData" />
            <h4> <Box>
           <Button
             sx={{
@@ -243,7 +242,6 @@ const Create = () => {
             Show Data
           </Button>
         </Box> <br></br>
-              Employee Details 
             </h4>
         </Box>
         <Box display="flex" justifyContent="space-between"  

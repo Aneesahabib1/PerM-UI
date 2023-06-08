@@ -14,6 +14,7 @@ export default function MAttcreate() {
     const [date, setDate] = useState('');
     const [checkbox, setCheckbox] = useState('');
     const [shift, setShift] = useState('');
+    const [status, setStatus] = useState('');
     const [lateentry, setLateentry] = useState('');
     const [earlyexit, setEarlyExit] = useState('');
 
@@ -27,6 +28,7 @@ export default function MAttcreate() {
             date,
             checkbox,
             shift,
+            status,
             lateentry,
             earlyexit,
         }).then(() => {
@@ -35,7 +37,7 @@ export default function MAttcreate() {
     }
     return(
         <Box m="20px">
-        <Header title="Employee Attendance" subtitle="Mark Attendance" />
+        <Header title="Employee Attendance" />
         <Box display="flex" justifyContent="space-between"  
         backgroundColor={colors.white[500]} color={colors.blue[900]}>
            <h4> <Box>
@@ -53,7 +55,6 @@ export default function MAttcreate() {
             Show Data
           </Button>
         </Box> <br></br>
-              Mark Attendance 
             </h4>
         </Box>
         <Box display="flex" justifyContent="space-between"  
@@ -70,10 +71,10 @@ export default function MAttcreate() {
              name="fromdate" required
             onChange={(e)=>setDate(e.target.value)} />
 
-<Form.Field>
+{/*<Form.Field>
                     <Checkbox label='Status'
                     onChange={(e)=>setCheckbox(e.target.value)} />
-                </Form.Field>
+          </Form.Field>*/}
              
              <label for="Type">Shift:</label>
   <select id="Type" name="Type" onChange={(e)=>setShift(e.target.value)} >
@@ -82,7 +83,15 @@ export default function MAttcreate() {
     <option value="Evening">Evening</option>
   </select>
 
- 
+  <label for="Type">Status</label>
+<select id="Type" name="Type" onChange={(e)=>setStatus(e.target.value)} >
+<option value="">Select</option>
+<option value="Present">Present</option>
+<option value="Leave">Leave</option>
+<option value="Sick-Leave">Sick-leave</option>
+<option value="On-duty">On-duty</option>
+
+</select>
  
  <label for="Type">Late Entry:</label>
   <select id="Type" name="Type" onChange={(e)=>setLateentry(e.target.value)} >

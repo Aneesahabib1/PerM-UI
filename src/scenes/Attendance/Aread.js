@@ -1,16 +1,28 @@
 import React, { useEffect, useState  } from 'react';
 import { Table, checkbox } from 'semantic-ui-react'
 import axios from 'axios';
-import {Box, Button} from "@mui/material";
+import {Box, Button, IconButton, Menu, MenuItem} from "@mui/material";
 import Header from '../../components/Header'
 import { colors, useTheme } from '@mui/material'
 import { tokens } from "../theme";
 import { Link } from 'react-router-dom';
-
-
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 const Aread=()=> {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
 
   const [APIData, setAPIData] = useState([]);
   useEffect(() => {
@@ -43,11 +55,49 @@ const onDelete = (id) => {
       getData();
   })
 }
-    return (
+const exportPdf = async()=>{
+  const doc = new jsPDF({orientation:'landscape'})
+  const tableData = APIData.map((data) => {
+    return [data.id, data.empid, data.fromdate, data.todate, data.reason];
+  });
+  doc.autoTable({
+    head: [['Id', 'Employee Id', 'From Date', 'To Date', 'Reason']],
+    body: tableData,
+  });
+  doc.save("Attendance.pdf");
+};
+return (
 <Box>          
 <Box display="flex" justifyContent="space-between" alignItems="center" >
   <Header title="Employee Attendance" subtitle="Employee Attendance Requests List" />
   <Box>
+  <Box sx={{ display: 'flex', justifyContent: 'flex-end'}}>
+          <IconButton onClick={handleMenuOpen}>
+          <MoreVertIcon sx={{ color: colors.blue[900] }} />
+        </IconButton>
+
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleMenuClose}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "right",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          PaperProps={{
+            style: {
+              color:"#0a1f2e", width:"200px", borderRadius:'15px', border:'1px solid #ccc',
+              backgroundColor: "#fbfbff",
+            },
+          }}
+        >
+          <MenuItem   onClick={handleMenuClose}>Import</MenuItem>
+          <MenuItem   onClick={exportPdf}>Export</MenuItem>
+        </Menu></Box>
           <Button 
             sx={{
               backgroundColor: colors.white[100],
@@ -63,7 +113,7 @@ Create Attendance Request </Button>
       <Box display="flex" justifyContent="space-between"  
       backgroundColor={colors.white[500]} color={colors.blue[900]}>
         <Table 
-        singleLine>
+        singleLine id='my-table'>
                 <Table.Header>
                     <Table.Row>
                     <Table.HeaderCell>Id</Table.HeaderCell>
@@ -72,8 +122,8 @@ Create Attendance Request </Button>
                         <Table.HeaderCell>From Date</Table.HeaderCell>
                         <Table.HeaderCell>To Date</Table.HeaderCell>
                         <Table.HeaderCell>Reason</Table.HeaderCell>
-                        <Table.HeaderCell></Table.HeaderCell>
-                        <Table.HeaderCell></Table.HeaderCell>
+                        <Table.HeaderCell>Update</Table.HeaderCell>
+                        <Table.HeaderCell>Delete</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
            <Table.Body>
@@ -88,6 +138,9 @@ Create Attendance Request </Button>
            <Table.Cell>{data.reason}</Table.Cell>
            <Link to='/Aupdate'>
   <Table.Cell> 
+  <IconButton  onClick={() => setData(data)}>
+        <EditIcon sx={{ color: colors.blue[900] }} />
+      </IconButton>{/*
   <Button  sx={{
               backgroundColor: colors.white[100],
               color: colors.blue[900],
@@ -95,10 +148,13 @@ Create Attendance Request </Button>
               fontWeight: "bold",
               padding: "10px 20px", borderRadius:'15px', boxShadow:'1px 2px 9px #aed7f4'
             }}
-  onClick={() => setData(data)}>Update</Button>
+          onClick={() => setData(data)}>Update</Button>*/}
    </Table.Cell>
 </Link>
 <Table.Cell>
+<IconButton  onClick={() => onDelete(data.id)}>
+        <DeleteIcon sx={{ color: colors.blue[900] }} />
+      </IconButton>{/*
    <Button  sx={{
               backgroundColor: colors.white[100],
               color: colors.blue[900],
@@ -106,13 +162,13 @@ Create Attendance Request </Button>
               fontWeight: "bold",
               padding: "10px 20px", borderRadius:'15px', boxShadow:'1px 2px 9px #aed7f4'
             }}
-    onClick={() => onDelete(data.id)}>Delete</Button>
+          onClick={() => onDelete(data.id)}>Delete</Button>*/}
    </Table.Cell>
         </Table.Row>
    )})}
 </Table.Body></Table>
 </Box>
         </Box>
-    )
-}
+    
+    )    }
 export default Aread;

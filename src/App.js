@@ -31,6 +31,7 @@ import UserRole from "./components/UserRole";
 import CDeapartment from "./scenes/Department/CDepartment";
 import ReadDepartment from "./scenes/Department/ReadDepartment";
 import UpdateDepartment from "./scenes/Department/UpdateDepartment";
+
 /*import { useAuth0 } from '@auth0/auth0-react';
 import Auth0ProviderWithHistory from "./components/Auth0ProviderWithHistory";
 import PrivateRoute from "./PrivateRoute";
