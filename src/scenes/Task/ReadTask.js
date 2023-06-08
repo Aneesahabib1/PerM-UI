@@ -151,17 +151,17 @@ Create Task    </Button>
                     <Table.Row>
                     <Table.HeaderCell>Id</Table.HeaderCell>
                     <Table.HeaderCell>Employee Id</Table.HeaderCell>
-                        <Table.HeaderCell>Title</Table.HeaderCell>
-                        <Table.HeaderCell>Description</Table.HeaderCell>
-                        <Table.HeaderCell>Status</Table.HeaderCell>
-                        <Table.HeaderCell>TPid</Table.HeaderCell>
-                        <Table.HeaderCell>Deadline</Table.HeaderCell>
-                        <Table.HeaderCell>Completion Date</Table.HeaderCell>
-                        <Table.HeaderCell>Assigned to</Table.HeaderCell>
-                        <Table.HeaderCell>Assigned by</Table.HeaderCell>
-                        <Table.HeaderCell>Task Type Id</Table.HeaderCell>
-                        <Table.HeaderCell>Update</Table.HeaderCell>
-                        <Table.HeaderCell>Delete</Table.HeaderCell>
+                    <Table.HeaderCell>Title</Table.HeaderCell>
+                    <Table.HeaderCell>Description</Table.HeaderCell>
+                    <Table.HeaderCell>Status</Table.HeaderCell>
+                    <Table.HeaderCell>TPid</Table.HeaderCell>
+                    <Table.HeaderCell>Deadline</Table.HeaderCell>
+                    <Table.HeaderCell>Completion Date</Table.HeaderCell>
+                    <Table.HeaderCell>Assigned to</Table.HeaderCell>
+                    <Table.HeaderCell>Assigned by</Table.HeaderCell>
+                    <Table.HeaderCell>Task Type Id</Table.HeaderCell>
+                    <Table.HeaderCell>Update</Table.HeaderCell>
+                    <Table.HeaderCell>Delete</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
            <Table.Body>

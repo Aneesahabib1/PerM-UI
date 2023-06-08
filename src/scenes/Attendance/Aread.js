@@ -57,6 +57,7 @@ const onDelete = (id) => {
 }
 const exportPdf = async()=>{
   const doc = new jsPDF({orientation:'landscape'})
+  
   const tableData = APIData.map((data) => {
     return [data.id, data.empid, data.fromdate, data.todate, data.reason];
   });

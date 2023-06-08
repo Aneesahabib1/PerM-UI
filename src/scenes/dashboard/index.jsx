@@ -10,6 +10,8 @@ import BarChart from "../../components/BarChart";
 import PieChart from "../../components/PieChart";
 import BarChart2 from "../../components/BarChart2";
 
+
+
 const Dashboard = () => {
   
   const theme = useTheme();
@@ -146,7 +148,7 @@ const Dashboard = () => {
               sx={{ padding: "30px 30px 0 30px" }}>
                  Tasks Status
               </Typography>
-              <Box height="100px" m="-20px 0 0 0">
+              <Box height="250px" m="-20px 0 0 0">
             <PieChart isDashboard={true} />
           </Box>
           </Box>

@@ -264,15 +264,21 @@ const Create = () => {
             control={Input}
             label='Last name' 
             placeholder='Last name'  onChange={(e)=>setLname(e.target.value)}
-          />
+          /></Form.Group>
+          {/*
           <Form.Field
             control={Select}
             label='Gender'
             options={options} value={gender}
             onChange={(e)=>setGender(e.target.value)}
             placeholder='Gender'
-          /></Form.Group>
-
+          /></Form.Group>*/}
+ <label for="Type">Gender:</label>
+  <select id="Type" name="Type" onChange={(e)=>setGender(e.target.value)} value={gender} >
+  <option value="Select">Select</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+  </select>
 <Form.Group widths='equal'>
 <Form.Field
           type='date'

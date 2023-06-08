@@ -116,6 +116,7 @@ export default PieChart;*/
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Pie } from 'react-chartjs-2';
+import Chart from "chart.js/auto";
 
 const PieChart = () => {
   const [chartData, setChartData] = useState({});
@@ -187,22 +188,13 @@ const PieChart = () => {
   };
 
   return (
-    
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '400px',
-      }}
-    >
-      <div style={{ width: '400px' }}>
+    <div>
 
       {chartData.labels && chartData.labels.length > 0 ? (
         <Pie data={chartData} />
       ) : (
         <p>Loading...</p>
-      )}</div>
+      )}
     </div>
   );
 };

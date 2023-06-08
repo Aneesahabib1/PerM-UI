@@ -131,6 +131,8 @@ export default BarChart;*/
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Bar } from 'react-chartjs-2';
+import Chart from "chart.js/auto";
+
 
 const BarChart = () => {
   const [chartData, setChartData] = useState({});

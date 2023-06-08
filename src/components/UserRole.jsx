@@ -13,8 +13,8 @@ const UserRole =()=>{
     const colors = tokens(theme.palette.mode)
     const columns =[
         { field: "id", headerName:"User Id" },
-        { field:"Rid", headerName:"Role Id", flex:1, cellClassName:"name--column-cell"},
-        { field:"PAId", headerName:"Param Access Type Id", flex:1},
+        { field:"Uname", headerName:"User Name", flex:1, cellClassName:"name--column-cell"},
+        { field:"Rname", headerName:"Role Name", flex:1},
         { field:"Createdon", headerName:"Created On", flex:1},
         { field:"deleted", headerName:"Is deleted", flex:1},
         { field:"Createdby", headerName:"Created by", flex:1},
@@ -39,9 +39,9 @@ const UserRole =()=>{
                   }
                   borderRadius="4px"
                 >
-                  {access === "admin" && <AdminPanelSettingsOutlinedIcon />}
-                  {access === "manager" && <SecurityOutlinedIcon />}
-                  {access === "user" && <LockOpenOutlinedIcon />}
+                  {access === "Admin" && <AdminPanelSettingsOutlinedIcon />}
+                  {access === "Power user" && <SecurityOutlinedIcon />}
+                  {access === "Basic user" && <LockOpenOutlinedIcon />}
                   <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
                     {access}
                   </Typography>
