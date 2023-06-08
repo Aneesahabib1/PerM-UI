@@ -145,7 +145,7 @@ Create Task    </Button>
       
       <Box display="flex" justifyContent="space-between"  
       backgroundColor={colors.white[500]} color={colors.blue[900]}>
-
+      <div style={{ height: '550px', overflow: 'auto', width:'1150px', backgroundColor: '#f4f5ff'}}>    
         <Table singleLine id='my-table'>
                 <Table.Header>
                     <Table.Row>
@@ -212,7 +212,7 @@ onClick={() => setData(data)}>Update</Button>*/}
    </Table.Cell>
         </Table.Row>
    )})}
-</Table.Body></Table>
+</Table.Body></Table></div>
 </Box></Box>
     )
 }

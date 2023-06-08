@@ -37,6 +37,20 @@ const MAttupdate = () => {
   }, []);
   
   const updateAPIData = () => {
+    if (!empid) {
+      alert('Please enter the employee ID.');
+      return;
+    }
+  
+    // Check if status is selected
+    if (status === '') {
+      alert('Please enter status.');
+      return;
+    }
+    if (!date) {
+      alert('Please select a date.');
+      return;
+    }
     axios.put(`https://64665758ba7110b6639e57a4.mockapi.io/api/attendance/AttendanceMark/${id}`, {
       id:id,
       empid: empid,
@@ -76,9 +90,9 @@ const MAttupdate = () => {
         </h4>
     </Box>
     <Box display="flex" justifyContent="space-between"  
-    backgroundColor={colors.white[100]} color={colors.blue[900]}  >   
-    <Form className="create-form">
-    <div className="mb-3">
+    backgroundColor={colors.white[500]} color={colors.blue[900]}  >   
+    <Form className="create-form" style={{ backgroundColor: '#f4f5ff'}}>
+    <div className="mb-3" >
 
 <label for="text">Employee Id</label>
   <input type="number" min="0" step="1" 
@@ -102,7 +116,7 @@ const MAttupdate = () => {
 </select>
 
 <label for="Type">Status</label>
-<select id="Type" name="Type" onChange={(e)=>setStatus(e.target.value)} >
+<select id="Type" name="Type" onChange={(e)=>setStatus(e.target.value)} value={status} >
 <option value="">Select</option>
 <option value="Present">Present</option>
 <option value="Leave">Leave</option>

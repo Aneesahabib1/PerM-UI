@@ -26,6 +26,26 @@ export default function CreateTask() {
 
     console.log("checkbox")
     const postData = () => {
+      if (!empid) {
+            alert('Please enter the employee ID.');
+            return;
+          }
+          if (!title) {
+            alert('Please enter task title.');
+            return;
+          }
+          if (status === '') {
+            alert('Please enter status.');
+            return;
+          }
+      if (!assignedby) {
+            alert('Please enter who assigned the task.');
+            return;
+          }
+      if (!assignedto) {
+            alert('Please enter the employee assigned to the task.');
+            return;
+          }
         axios.post(`https://64665758ba7110b6639e57a4.mockapi.io/api/attendance/Task`, {
             empid,
             title,
@@ -59,25 +79,29 @@ Show Tasks          </Button>
         </Box>
       </Box>            
         <Box display="flex" justifyContent="space-between"  
-        backgroundColor={colors.white[100]} color={colors.blue[900]}  >   
+        backgroundColor={colors.white[500]} color={colors.blue[900]}  >   
         <Form className="create-form">
         <div className="mb-3">
-            
+        <div style={{ display: 'flex', marginBottom: '1rem' }}>
+          <div style={{ marginRight: '1rem', width: '20%'  }}>
     <label for="text">Employee Id</label>
       <input type="number" min="0" step="1" 
             placeholder="Enter Employee ID" name="empid" required
             onChange={(e)=>setEmpid(e.target.value)} />
-
+</div>
+<div style={{ marginRight: '1rem', width: '20%'  }}>
  <label for="text">Title:</label>
       <input type="text" id="txct2" 
             placeholder="" name="reason" sx={{width:'20px', Height:'40px'}}
             onChange={(e)=>setTitle(e.target.value)}/>
-
+</div>
+<div style={{ marginRight: '1rem', width: '20%'  }}>
 <label for="text">Description:</label>
       <input type="text" id="txct2" 
             placeholder="" name="reason" sx={{width:'20px', Height:'40px'}}
             onChange={(e)=>setDescription(e.target.value)}/>
-
+</div>       
+   <div style={{ marginRight: '1rem', width: '20%'  }}>
 <label for="Type">Status</label>
 <select id="Type" name="Type" onChange={(e)=>setStatus(e.target.value)} >
 <option value="">Select</option>
@@ -88,37 +112,45 @@ Show Tasks          </Button>
 <option value="Awaited Review">Awaited Review</option>
 
 </select>
+</div></div>
+<div style={{ display: 'flex', marginBottom: '1rem' }}>
+          <div style={{ marginRight: '1rem', width: '20%'  }}>
 
 <label for="text">Task Priority Id</label>
       <input type="number" min="0" step="1" 
             placeholder="Enter Employee ID" name="TPid" requiredc
             onChange={(e)=>setTPid(e.target.value)} />
-
+</div>          <div style={{ marginRight: '1rem', width: '20%'  }}>
       <label for="pwd">Deadline:</label>
       <input type="date" id="txt1" 
              name="fromdate" required
             onChange={(e)=>setDeadline(e.target.value)} />
-
+</div>          <div style={{ marginRight: '1rem', width: '20%'  }}>
 <label for="pwd">Completion Date:</label>
       <input type="date" id="txt1" 
              name="fromdate" 
             onChange={(e)=>setCompletiondate(e.target.value)} />
-
+</div>          <div style={{ marginRight: '1rem', width: '20%'  }}>
 <label for="text">Assigned to:</label>
       <input type="text" id="txct2" 
             placeholder="" name="reason" sx={{width:'20px', Height:'40px'}} required
             onChange={(e)=>setAssignedto(e.target.value)}/>
-
+</div></div>
+<div style={{ display: 'flex', marginBottom: '1rem' }}>
+          <div style={{ marginRight: '1rem', width: '84%'  }}>
 <label for="text">Assigned by:</label>
       <input type="text" id="txct2" 
             placeholder="" name="reason" sx={{width:'20px', Height:'40px'}}
             onChange={(e)=>setAssignedby(e.target.value)}/>
-
+</div> </div>
+<div style={{ display: 'flex', marginBottom: '1rem' }}>
+ <div style={{ marginRight: '1rem', width: '84%'  }}>
 <label for="text">Task Type Id</label>
       <input type="number" min="0" step="1" 
             placeholder="Enter Employee ID" name="TPid" required
             onChange={(e)=>setTypeid(e.target.value)} />
-    </div>
+    </div></div></div>
+    <br></br><br></br>
 <Button   
  type="submit" color='#0a1f2e' className="btn-primary"  onClick={postData} 
  >Submit</Button>

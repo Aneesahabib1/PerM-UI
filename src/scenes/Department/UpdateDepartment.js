@@ -36,6 +36,18 @@ export default function UpdateDepartment() {
 
 
     const updateAPIData = () => {
+      if (!departmentid) {
+        alert('Please enter the employee ID.');
+        return;
+      }
+      if (!name) {
+        alert('Please enter the name.');
+        return;
+      }
+      if (!code) {
+        alert('Please enter the name.');
+        return;
+      }
         axios.put(`https://647e18d4af984710854aee8c.mockapi.io/Deparments/${id}`, {
           id: id,
             departmentid: departmentid,
@@ -72,6 +84,8 @@ export default function UpdateDepartment() {
         </Box>
         <Box display="flex" justifyContent="space-between"  
         backgroundColor={colors.white[100]} color={colors.blue[900]}  >   
+        <div style={{ height: '550px', overflow: 'auto', width:'1130px', backgroundColor: '#f4f5ff'}}>    
+
         <Form className="create-form">
         <div className="mb-3">
     <label for="text">Department Id</label>
@@ -110,7 +124,7 @@ export default function UpdateDepartment() {
  type="submit"  onClick={updateAPIData} 
  >Update</Button>
 
-  </Form>
+  </Form></div>
   
   </Box>
   </Box>

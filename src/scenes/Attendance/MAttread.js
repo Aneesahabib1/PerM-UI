@@ -114,6 +114,7 @@ Mark New     </Button>
       </Box>
       <Box display="flex" justifyContent="space-between"  
       backgroundColor={colors.white[500]} color={colors.blue[900]}>
+      <div style={{ height: '550px', overflow: 'auto', width:'1180px', backgroundColor: '#f4f5ff'}}>    
         <Table singleLine id='my-table'>
                 <Table.Header>
                     <Table.Row>
@@ -171,7 +172,7 @@ Mark New     </Button>
    </Table.Cell>
         </Table.Row>
    )})}
-</Table.Body></Table>
+</Table.Body></Table></div>
 </Box>
         </Box>
     )

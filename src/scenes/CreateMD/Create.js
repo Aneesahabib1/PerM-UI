@@ -1,14 +1,12 @@
-import { colors, useTheme } from '@mui/material'
+import { useTheme } from '@mui/material'
 import axios from "axios";
 import { tokens } from "../theme";
 import {React, useState, useEffect} from 'react'
 import Header from '../../components/Header'
 import { Box } from '@mui/material'
-import { Height } from '@mui/icons-material';
 import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import { Button, Form, Checkbox, Input, Select } from 'semantic-ui-react'
+import { Button, Form,  Input } from 'semantic-ui-react'
 
 
 const Create = () => {
@@ -96,10 +94,11 @@ const Create = () => {
     e.preventDefault();
 
     // Check if any required field is empty
-    if (!empcode || !fname ) {
+    if (!empcode || !fname || cnic.length !== 13 || isNaN(cnic)) {
       alert('Please fill in all required fields.');
-      return;
+      return false;
     }
+    
     postData();
   };
   useEffect(() => {
@@ -152,6 +151,66 @@ const Create = () => {
       ]
    const history = useNavigate();
     const postData = () => {
+      if (!empcode || !fname || !gender || !doj || !etype || !jobapp || !offrdate
+        || !departn || !desigg || !shift || !salarymode || !bankacc || cnic.length !== 13 || isNaN(cnic)) {
+        alert('Please fill in all required fields and ensure the CNIC is valid.');
+        return;
+      }
+      if (new Date(doj) < new Date(offrdate)) {
+        alert('Date of joining cannot be before the offer date.');
+        return;
+      }
+      if (new Date(conenddate) <= new Date(doj) || new Date(conenddate) <= new Date(offrdate)) {
+        alert('Contract end date should be after the date of joining and offer date.');
+        return;
+      }
+      if (new Date(confdate) >= new Date(doj)) {
+        alert('Confirmation date should be before the date of joining.');
+        return;
+      }
+      const maxDateOfBirth = new Date('2005-01-01');
+  if (new Date(dob) >= maxDateOfBirth) {
+    alert('Date of birth should be before a certain date.');
+    return;
+  }
+  if (!/^\d{14,18}$/.test(pfacc)) {
+    alert('Provident Fund account number should be a numerical digit between 14 to 18 digits.');
+    return;
+  }
+  if (new Date(issuedata) >= new Date(expdate)) {
+    alert('Date of issue should be before the valid upto date.');
+    return;
+  }
+      if (
+        new Date(dor) <= new Date(doj) ||
+        new Date(dor) <= new Date(offrdate) ||
+        new Date(dor) <= new Date(confdate)
+      ) {
+        alert('Date of retirement should be after the date of joining, offer date, and confirmation date.');
+        return;
+      }
+      if (!/^\d{1,2}$/.test(holidays)) {
+        alert('Holidays should be a 1 or 2-digit numeric value.');
+        return;
+      }
+      if (!/^\d{13,17}$/.test(bankacc)) {
+        alert('Bank account number should be between 13 to 17 digits.');
+        return;
+      }
+      if (hnumber.length !== 11 || isNaN(hnumber)) {
+        alert('Number should be 11 digits.');
+        return;
+      }
+      if (new Date(resigdate) >= new Date(exdate)) {
+        alert('Resignation date should be before the exit date.');
+        return;
+      }
+    
+      if (new Date(relievingdate) <= new Date(resigdate)) {
+        alert('Relieving date should be after the resignation date.');
+        return;
+      }
+    
         axios.post (`https://646296267a9eead6fad2c898.mockapi.io/api/V1/EmpMD-PerM`, {
           empcode: empcode,
         fname: fname,
@@ -246,8 +305,8 @@ const Create = () => {
         </Box>
         <Box display="flex" justifyContent="space-between"  
         backgroundColor={colors.white[100]} color={colors.blue[900]}  >
-              
-        <Form className="create-form">
+<div style={{ height: '550px', overflow: 'auto', width:'1130px', backgroundColor: '#f4f5ff'}}>    
+    <Form className="create-form" >
         <Form.Group widths='equal'>
         <Form.Field
             control={Input}
@@ -292,13 +351,20 @@ const Create = () => {
             label='Data of joining'
             placeholder='Enter DOJ' required
             onChange={(e)=>setDoj(e.target.value)}
-          />
+          /></Form.Group>
+          {/*
           <Form.Field
             control={Select}
             options={optionst}
             label='Employeement Type'
             placeholder='Enter Employeement type'  onChange={(e)=>setEtype(e.target.value)}
-          /></Form.Group>
+        />*/}
+         <label for="Type">Employeement Type:</label>
+  <select id="Type" name="Type" onChange={(e)=>setEtype(e.target.value)} value={etype} >
+  <option value="Select">Select</option>
+    <option value="Full Time">Full Time</option>
+    <option value="Part Time">Part Time</option>
+  </select>
    {/* 
 
 */}
@@ -307,7 +373,7 @@ const Create = () => {
         backgroundColor={colors.white[500]} color={colors.blue[900]}>
             <h4>Emergency Contacts</h4>
         </Box>
-        <Form.Group widths='equal'>
+        <Form.Group widths='equal' onSubmit={handleSubmit}>
 <Form.Field
             control={Input}
             label='Name'
@@ -346,15 +412,22 @@ const Create = () => {
             placeholder=''
             onChange={(e)=>setOffrdate(e.target.value)}
           />
-         </Form.Group>
-         <Form.Group widths='equal'>
+         </Form.Group>{/*
 <Form.Field
            control={Select}
            options={optionsta}
             label='Notice days'
             placeholder='Select'
             onChange={(e)=>setNotice(e.target.value)}
-          /><Form.Field
+/>*/}
+<label for="Type">Notice Days:</label>
+  <select id="Type" name="Type" onChange={(e)=>setNotice(e.target.value)} value={notice} >
+  <option value="Select">Select</option>
+    <option value="15">15 Days</option>
+    <option value="30">30 Days</option>
+  </select>
+  <Form.Group widths='equal'>
+          <Form.Field
           type='date'
             control={Input}
             label='Confirmation Date'
@@ -372,8 +445,7 @@ const Create = () => {
             <Box display="flex" justifyContent="space-between"  
         backgroundColor={colors.white[500]} color={colors.blue[900]}>
             <h4>Department & Grade</h4></Box>
-
-            <Form.Group widths='equal'>
+              {/*
 <Form.Field
 control={Select}
 options={optionstb}
@@ -385,16 +457,23 @@ options={optionstb}
           label='Grade'
           placeholder='' required
           onChange={(e)=>setGrade(e.target.value)}
-        />
+/>*/}
+<label for="Type">Department:</label>
+  <select id="Type" name="Type" onChange={(e)=>setDepartn(e.target.value)} value={departn} >
+  <option value="Select">Select</option>
+    <option value="Finance">Finance</option>
+    <option value="Sales">Sales</option>
+    <option value="Marketing">Marketing</option>
+    <option value="HR">HR</option>
+    <option value="Production">Production</option>
+  </select>
+  <Form.Group widths='equal'>
         <Form.Field
             control={Input}
             label='Designation'
             placeholder='' value={desigg}
             onChange={(e)=>SetDesigg(e.target.value)}
           />
-         </Form.Group>
-
-         <Form.Group widths='equal'>
 <Form.Field
             control={Input}
             label='Report to'
@@ -421,20 +500,25 @@ options={optionstb}
           label='Holidays'
           placeholder=''
           onChange={(e)=>setHolidays(e.target.value)}
-        />
+        />{/*
         <Form.Field
            control={Select}
            options={optionstc}
             label='Default Shifts'
             placeholder=''
             onChange={(e)=>setShift(e.target.value)}
-          />
-         </Form.Group>
+/>*/} </Form.Group>
+   <label for="Type"> Default shifts:</label>
+  <select id="Type" name="Type" onChange={(e)=>setShift(e.target.value)} value={shift} >
+  <option value="Select">Select</option>
+    <option value="Morning">Morning</option>
+    <option value="Evening">Evening</option>
+  </select>
 
   <Box display="flex" justifyContent="space-between"  
         backgroundColor={colors.white[500]} color={colors.blue[900]}>
             <h4>Bank Details</h4></Box>
-            <Form.Group widths='equal'>
+              {/*
 <Form.Field
          control={Select}
          options={optionstd}
@@ -446,15 +530,21 @@ options={optionstb}
           label='Bank'
           placeholder=''
           onChange={(e)=>setBank(e.target.value)}
-        />
+/>*/}
+   <label for="Type"> Salary Mode:</label>
+  <select id="Type" name="Type" onChange={(e)=>setSalarymode(e.target.value)} value={salarymode} >
+  <option value="Select">Select</option>
+    <option value="Bank">Bank</option>
+    <option value="Cheque">Cheque</option>
+  </select>
+  <Form.Group widths='equal'>
+
         <Form.Field
             control={Input}
             label='Bank Account #'
             placeholder=''
             onChange={(e)=>setbankAcc(e.target.value)}
           />
-         </Form.Group>
-         <Form.Group widths='equal'>
 <Form.Field
             control={Input}
             label='Payroll Cost Centre'
@@ -489,7 +579,7 @@ options={optionstb}
         backgroundColor={colors.white[500]} color={colors.blue[900]}>
             <h4>Contact Details</h4></Box>
 
-            <Form.Group widths='equal'>
+          {/*
 <Form.Field
            control={Select}
            options={optionste}
@@ -501,7 +591,14 @@ options={optionstb}
           label='Blood Group'
           placeholder=''
           onChange={(e)=>setBldgrp(e.target.value)}
-        />
+/>*/}
+   <label for="Type" padding='80px'> Marital Status:</label>
+     <select id="Type" name="Type" onChange={(e)=>setStatus(e.target.value)} value={status} >
+  <option value="Select">Select</option>
+    <option value="Married">Married</option>
+    <option value="Unmarried">Un-married</option>
+  </select>
+  <Form.Group widths='equal'>
         <Form.Field
             control={Input}
             label='Family Background'
@@ -520,6 +617,7 @@ options={optionstb}
           label='CNIC'
           placeholder='' required
           onChange={(e)=>setCnic(e.target.value)}
+
         />
         <Form.Field
         type='date'
@@ -724,12 +822,12 @@ type='date'
                     <Checkbox label='I agree to the Terms and Conditions' />
 </Form.Field>*/}
 <Button   
- type="submit" disabled={!isFormValid}
+ type="submit" 
  color='#0a1f2e'  onClick={postData} 
  >Submit</Button>
 
   </Form>
-  
+  </div>
   </Box>
   </Box>
   )

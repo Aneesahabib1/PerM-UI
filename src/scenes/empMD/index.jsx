@@ -353,6 +353,8 @@ Create Employee          </Button>
       </Box>
       <Box display="flex" justifyContent="space-between"  
       backgroundColor={colors.white[500]} color={colors.blue[900]}>
+        <div style={{ height: '550px', overflow: 'auto', width:'1180px', backgroundColor: '#f4f5ff'}}>    
+
         <Table singleLine>
                 <Table.Header>
                     <Table.Row>
@@ -412,7 +414,7 @@ Create Employee          </Button>
    </Table.Cell>
         </Table.Row>
    )})}
-</Table.Body></Table>
+</Table.Body></Table></div>
 </Box>
         </Box>
     )

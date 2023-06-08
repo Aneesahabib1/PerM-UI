@@ -17,6 +17,7 @@ const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
     return (
+      <div style={{ height: '650px', overflow: 'auto', width:'1140px', backgroundColor: '#f4f5ff'}}>    
       <Box m="20px">
      
         <Box display="flex" justifyContent="space-between" alignItems="center" >
@@ -36,7 +37,7 @@ const Dashboard = () => {
           </Button>
         </Box>
       </Box>
-      
+
       <Box
         display="grid"
         gridTemplateColumns="repeat(12, 1fr)"
@@ -139,7 +140,11 @@ const Dashboard = () => {
             </Box>
         <Box
         gridColumn="span 6"
-        gridRow="span 2"
+        gridRow="span 2"  display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        overflow="hidden"
         backgroundColor={colors.white[100]} boxShadow='1px 2px 9px #d6ebfa' borderRadius='25px'
         >
               <Typography
@@ -148,13 +153,16 @@ const Dashboard = () => {
               sx={{ padding: "30px 30px 0 30px" }}>
                  Tasks Status
               </Typography>
-              <Box height="250px" m="-20px 0 0 0">
-            <PieChart isDashboard={true} />
+              <Box height={250} width={250}>
+            <PieChart isDashboard={true} height={200} width={200}/>
           </Box>
           </Box>
           <Box
           gridColumn="span 12"
-          gridRow="span 3"
+          gridRow="span 3" flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          overflow="hidden"
           backgroundColor={colors.white[100]} boxShadow='1px 2px 9px #d6ebfa' borderRadius='25px'
         > 
               <Typography
@@ -165,14 +173,14 @@ const Dashboard = () => {
               >
                 Todays Attendance
               </Typography>
-              <Box height="250px" m="-20px 0 0 0">
+              <Box height={840} width={840}>
             <BarChart2 isDashboard={true} />
           </Box>
           
             </Box>
             
         
-        </Box></Box>
+        </Box></Box></div>
         
     )
 };

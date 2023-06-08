@@ -147,6 +147,7 @@ const PieChart = () => {
         ],
       };
 
+      
       setChartData(chartData);
     } catch (error) {
       console.error(error);
@@ -188,11 +189,16 @@ const PieChart = () => {
   };
 
   return (
-    <div>
-
+    <div style={{ maxHeight: '400px', maxWidth: '500px', width: '100%', margin: '0 auto' }}>
       {chartData.labels && chartData.labels.length > 0 ? (
-        <Pie data={chartData} />
-      ) : (
+        <Pie 
+        data={chartData}
+        options={{
+          responsive: true,
+          maintainAspectRatio: true,
+          aspectRatio: 1,
+        }} />
+        ) : (
         <p>Loading...</p>
       )}
     </div>

@@ -32,6 +32,18 @@ const Aupdate = () => {
   }, []);
   
   const updateAPIData = () => {
+    if (!empid) {
+      alert('Please enter the employee ID.');
+      return;
+    }
+    if (!fromdate) {
+      alert('Please enter date.');
+      return;
+    }
+    if (!todate) {
+      alert('Please enter date.');
+      return;
+    }
     axios.put(`https://646296267a9eead6fad2c898.mockapi.io/api/V1/Attendance/${id}`, {
       id:id,
       empid: empid,
@@ -68,7 +80,8 @@ const Aupdate = () => {
         </h4>
     </Box>
     <Box display="flex" justifyContent="space-between"  
-    backgroundColor={colors.white[100]} color={colors.blue[900]}  >   
+    backgroundColor={colors.white[500]} color={colors.blue[900]}  >   
+    
     <Form className="create-form">
       <div className="mb-3">
 <label for="text">Employee Id</label>

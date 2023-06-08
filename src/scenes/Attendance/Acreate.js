@@ -10,7 +10,7 @@ import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 export default function Acreate() {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    const [empcode, setEmpcode] = useState('');
+    const [empid, setEmpid] = useState('');
     const [fromdate, setFromdate] = useState('');
     const [todate, setTodate] = useState('');
     const [checkbox, setCheckbox] = useState(false);
@@ -19,14 +19,26 @@ export default function Acreate() {
     
     console.log(checkbox)
     const postData = () => {
+      if (!empid) {
+        alert('Please enter the employee ID.');
+        return;
+      }
+      if (!fromdate) {
+        alert('Please enter date.');
+        return;
+      }
+      if (!todate) {
+        alert('Please enter date.');
+        return;
+      }
         axios.post(`https://646296267a9eead6fad2c898.mockapi.io/api/V1/Attendance`, {
-            empcode,
+            empid,
             fromdate,
             todate,
             checkbox,
             reason
         }).then(() => {
-            history.push('/Aread')
+            history('/Aread')
         })
     }
     return(
@@ -52,14 +64,16 @@ export default function Acreate() {
             </h4>
         </Box>
         <Box display="flex" justifyContent="space-between"  
-        backgroundColor={colors.white[100]} color={colors.blue[900]}  >   
+        backgroundColor={colors.white[500]} color={colors.blue[900]}  >  
+         
         <Form className="create-form">
         <div className="mb-3">
 
     <label for="text">Employee Code</label>
       <input type="number" min="0" step="1" 
-            placeholder="Enter Employee ID" name="empid" required
-            onChange={(e)=>setEmpcode(e.target.value)} />
+            placeholder="Enter Employee ID" name="empid" required value={empid}
+            onChange={(e)=>setEmpid(e.target.value)} />
+
       <label for="pwd">From Date:</label>
       <input type="date" id="txt1" 
              name="fromdate" required

@@ -21,6 +21,18 @@ export default function CDeapartment() {
 
 
     const postData = () => {
+      if (!departmentid) {
+        alert('Please enter the employee ID.');
+        return;
+      }
+      if (!name) {
+        alert('Please enter the name.');
+        return;
+      }
+      if (!code) {
+        alert('Please enter the name.');
+        return;
+      }
         axios.post(`https://647e18d4af984710854aee8c.mockapi.io/Deparments`, {
             departmentid,
             name,
@@ -55,7 +67,7 @@ export default function CDeapartment() {
             </h4>
         </Box>
         <Box display="flex" justifyContent="space-between"  
-        backgroundColor={colors.white[100]} color={colors.blue[900]}  >   
+        backgroundColor={colors.white[500]} color={colors.blue[900]}  >   
         <Form className="create-form">
         <div className="mb-3">
     <label for="text">Department Id</label>
