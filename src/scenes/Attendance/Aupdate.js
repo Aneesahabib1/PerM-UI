@@ -44,6 +44,10 @@ const Aupdate = () => {
       alert('Please enter date.');
       return;
     }
+    if (new Date(fromdate) >= new Date(todate)) {
+      alert('Please select proper dates.');
+      return;
+    }
     axios.put(`https://646296267a9eead6fad2c898.mockapi.io/api/V1/Attendance/${id}`, {
       id:id,
       empid: empid,

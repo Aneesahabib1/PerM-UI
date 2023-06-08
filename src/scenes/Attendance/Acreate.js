@@ -31,6 +31,10 @@ export default function Acreate() {
         alert('Please enter date.');
         return;
       }
+      if (new Date(fromdate) >= new Date(todate)) {
+        alert('Please select proper dates.');
+        return;
+      }
         axios.post(`https://646296267a9eead6fad2c898.mockapi.io/api/V1/Attendance`, {
             empid,
             fromdate,
