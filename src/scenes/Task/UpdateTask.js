@@ -44,9 +44,13 @@ const UpdateTask = () => {
   
   const updateAPIData = () => {
     if (!empid) {
-      alert('Please enter the employee ID.');
+      alert('Please enter the employee Code.');
       return;
-    }
+    }/*
+    if (!/^[a-zA-Z0-9]+$/.test(empid)) {
+      alert('Employee Code should be alphanumeric.');
+      return;
+    }*/
     if (!title) {
       alert('Please enter task title.');
       return;

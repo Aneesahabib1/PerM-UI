@@ -37,9 +37,10 @@ export default function UpdateDepartment() {
 
     const updateAPIData = () => {
       if (!departmentid) {
-        alert('Please enter the employee ID.');
+        alert('Please enter the department Code.');
         return;
       }
+      
       if (!name) {
         alert('Please enter the name.');
         return;
@@ -88,8 +89,8 @@ export default function UpdateDepartment() {
 
         <Form className="create-form">
         <div className="mb-3">
-    <label for="text">Department Id</label>
-      <input type="number" min="0" step="1" value={departmentid}
+    <label for="text">Department Code</label>
+      <input type="text"  value={departmentid}
             placeholder="Enter Department ID" name="departmentid" required
             onChange={(e)=>setDepartmentId(e.target.value)} />
 
